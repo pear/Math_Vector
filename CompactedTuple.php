@@ -32,12 +32,10 @@ class Math_CompactedTuple {
 		} elseif (is_object($arg) && get_class($arg) == "math_tuple") {
 			$this->data = $this->_genCompacterArray($arg->getData());
 		} else {
-			$this->_fatal(
-					"Incorrect parameter for Math_CompactedTuple constructor. ".
+			$msg = "Incorrect parameter for Math_CompactedTuple constructor. ".
 					"Expecting an unidimensional array or a Math_Tuple object,". 
-					" got '$arg'",
-					"in line ".__LINE__." of file ".__FILE__
-					);
+					" got '$arg'\n";
+			new PEAR_Error($msg, null, PEAR_ERROR_DIE);
 		}
 		return true;
 	}
@@ -94,17 +92,6 @@ class Math_CompactedTuple {
 				$out[] = $val;
 		return $out;
 	}
-
-	function _fatal($msg, $dbg) {
-		return new PEAR_Error($msg, null, PEAR_ERROR_CALLBACK, "handleError", $dbg);
-	}
-}
-
-function handleError($err) { 
-	$msg = "*FATAL ERROR* ".$err->message."\n".$err->userinfo." ".
-			"(PHP ".PHP_VERSION.", ".PHP_OS.") ".
-			"Aborting ...\n";
-	die(wordwrap($msg,50));
 }
 
 ?>
