@@ -48,7 +48,7 @@ class Math_Vector {
 	 *
 	 * @param	mixed	$data	a Math_Tuple object, a Math_Vetctor object, or an array of numeric data
 	 * @access	public
-	 * @return	object	Math_Vector (or Pear_Error on error)
+	 * @return	object	Math_Vector (or PEAR_Error on error)
 	 */
 	function Math_Vector($data) /*{{{*/
 	{
@@ -180,7 +180,7 @@ class Math_Vector {
 	 *
 	 * @access	public
 	 * @param	float	$f	scaling factor
-	 * @return	mixed	void on success, a Pear_Error object otherwise
+	 * @return	mixed	void on success, a PEAR_Error object otherwise
 	 */
 	function scale($f) /*{{{*/
 	{
@@ -190,7 +190,7 @@ class Math_Vector {
 			for ($i=0; $i < $n; $i++)
 				$this->set($i, $this->get($i) * $f);
 		} else {
-			return new Pear_Error("Requires a numeric factor and a Math_Vector object");
+			return new PEAR_Error("Requires a numeric factor and a Math_Vector object");
 		}
 	}/*}}}*/
 
@@ -200,7 +200,7 @@ class Math_Vector {
 	 * @access	public
 	 * @param	integer	$i	the index of the element
 	 * @param	numeric	$value	the value to assign to the element
-	 * @return	mixed	true on success, a Pear_Error object otherwise
+	 * @return	mixed	true on success, a PEAR_Error object otherwise
 	 */
 	function set($i, $value) /*{{{*/
 	{
@@ -216,7 +216,7 @@ class Math_Vector {
 	 *
 	 * @access	public
 	 * @param	integer	$i	the index of the element
-	 * @return	mixed	the element value (numeric) on success, a Pear_Error object otherwise
+	 * @return	mixed	the element value (numeric) on success, a PEAR_Error object otherwise
 	 */
 	function get($i) {/*{{{*/
 		$res = $this->tuple->getElement($i);
@@ -241,10 +241,10 @@ class Math_Vector {
 						$vector->tuple->getElement($i)), 2);
 				return sqrt($sum);
 			} else {
-				return new Pear_Error("Vector has to be of the same size");
+				return new PEAR_Error("Vector has to be of the same size");
 			}
 		else
-			return new Pear_Error("Wrong parameter type, expecting a Math_Vector object");
+			return new PEAR_Error("Wrong parameter type, expecting a Math_Vector object");
 	}/*}}}*/
 
 	/**

@@ -46,7 +46,7 @@ class Math_Tuple {
 	 *
 	 * @param	array	$data	array of numbers
 	 * @access	public
-	 * @return	object	Math_Tuple (or Pear_Error on error)
+	 * @return	object	Math_Tuple (or PEAR_Error on error)
 	 */
 	function Math_Tuple ($data) /*{{{*/
 	{
@@ -86,7 +86,7 @@ class Math_Tuple {
 	 * @access	public
 	 * @param	integer	$elindex	element index
 	 * @param	numeric	$elvalue	element value
-	 * @return	mixed	true if successful, Pear_Error object otherwise
+	 * @return	mixed	true if successful, PEAR_Error object otherwise
 	 */
 	function setElement ($elindex, $elvalue) /*{{{*/
 	{
@@ -102,7 +102,7 @@ class Math_Tuple {
 	 *
 	 * @access	public
 	 * @param	numeric	$elvalue	element value
-	 * @return	mixed	index of appended element on success, Pear_Error object otherwise
+	 * @return	mixed	index of appended element on success, PEAR_Error object otherwise
 	 */
 	function addElement ($elvalue) /*{{{*/
 	{
@@ -118,7 +118,7 @@ class Math_Tuple {
 	 *
 	 * @access public
 	 * @param	integer $elindex	element index
-	 * @return	mixed	true on success, Pear_Error object otherwise
+	 * @return	mixed	true on success, PEAR_Error object otherwise
 	 */
 	function delElement ($elindex) /*{{{*/
 	{
@@ -135,7 +135,7 @@ class Math_Tuple {
 	 *
 	 * @access	public
 	 * @param	integer	$elindex	element index
-	 * @return	mixed	numeric on success, Pear_Error otherwise
+	 * @return	mixed	numeric on success, PEAR_Error otherwise
 	 */
 	function getElement($elindex) /*{{{*/
 	{

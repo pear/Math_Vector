@@ -68,7 +68,7 @@ class Math_Vector2 extends Math_Vector {
 	 *
 	 * @access	public
 	 * @param	numeric	$val	the value for the Y component
-	 * @return	mixed	true on success, Pear_Error object otherwise
+	 * @return	mixed	true on success, PEAR_Error object otherwise
 	 */
 	function setX($val)/*{{{*/
 	{
@@ -91,7 +91,7 @@ class Math_Vector2 extends Math_Vector {
 	 *
 	 * @access	public
 	 * @param	numeric	$val	the value for the Y component
-	 * @return	mixed	true on success, Pear_Error object otherwise
+	 * @return	mixed	true on success, PEAR_Error object otherwise
 	 */
 	function setY($val)/*{{{*/
 	{

@@ -135,14 +135,14 @@ class Math_VectorOp {
 	 * @access	public
 	 * @param	int	$size	vector size
 	 * @param	int	$index	element to be set at 1
-	 * @return	object	if ($size == 2) Math_Vector2 elseif ($size == 3) Math_Vector3 else Math_Vector, on error Pear_Error
+	 * @return	object	if ($size == 2) Math_Vector2 elseif ($size == 3) Math_Vector3 else Math_Vector, on error PEAR_Error
 	 *
 	 * @see	createZero()
 	 */
 	function createBasis ($size, $index) /*{{{*/
 	{
 		if ($index >= $size)
-			return new Pear_Error("Incorrect index for size: $index >= $size");
+			return new PEAR_Error("Incorrect index for size: $index >= $size");
 		$v = Math_VectorOp::createZero($size);
 		$res =$v->set($index, 1);
 		if (PEAR::isError($res))
@@ -158,7 +158,7 @@ class Math_VectorOp {
 	 * @access	public
 	 * @param	object	Math_Vector (or subclass)	$v1
 	 * @param	object	Math_Vector (or subclass)	$v2
-	 * @return	object	Math_Vector (or subclass) on success, Pear_Error otherwise
+	 * @return	object	Math_Vector (or subclass) on success, PEAR_Error otherwise
 	 *
 	 * @see 	isVector()
 	 */
@@ -167,12 +167,12 @@ class Math_VectorOp {
 		if (Math_VectorOp::isVector($v1) && Math_VectorOp::isVector($v2)) {
 			$n = $v1->size();
 			if ($v2->size() != $n)
-				return new Pear_Error("Vectors must of the same size");
+				return new PEAR_Error("Vectors must of the same size");
 			for ($i=0; $i < $n; $i++)
 				$arr[$i] = $v1->get($i) + $v2->get($i);
 			return new Math_Vector($arr);
 		} else {
-			return new Pear_Error("V1 and V2 must be Math_Vector objects");
+			return new PEAR_Error("V1 and V2 must be Math_Vector objects");
 		}
 	}/*}}}*/
 
@@ -183,7 +183,7 @@ class Math_VectorOp {
 	 * @access	public
 	 * @param	object	Math_Vector (or subclass)	$v1
 	 * @param	object	Math_Vector (or subclass)	$v2
-	 * @return	object	Math_Vector (or subclass) on success, Pear_Error otherwise
+	 * @return	object	Math_Vector (or subclass) on success, PEAR_Error otherwise
 	 *
 	 * @see 	isVector()
 	 */
@@ -192,12 +192,12 @@ class Math_VectorOp {
 		if (Math_VectorOp::isVector($v1) && Math_VectorOp::isVector($v2)) {
 			$n = $v1->size();
 			if ($v2->size() != $n)
-				return new Pear_Error("Vectors must of the same size");
+				return new PEAR_Error("Vectors must of the same size");
 			for ($i=0; $i < $n; $i++)
 				$arr[$i] = $v1->get($i) - $v2->get($i);
 			return new Math_Vector($arr);
 		} else {
-			return new Pear_Error("V1 and V2 must be Math_Vector objects");
+			return new PEAR_Error("V1 and V2 must be Math_Vector objects");
 		}
 	}/*}}}*/
 
@@ -208,7 +208,7 @@ class Math_VectorOp {
 	 * @access	public
 	 * @param	object	Math_Vector (or subclass)	$v1
 	 * @param	object	Math_Vector (or subclass)	$v2
-	 * @return	object	Math_Vector (or subclass) on success, Pear_Error otherwise
+	 * @return	object	Math_Vector (or subclass) on success, PEAR_Error otherwise
 	 *
 	 * @see 	isVector()
 	 */
@@ -217,12 +217,12 @@ class Math_VectorOp {
 		if (Math_VectorOp::isVector($v1) && Math_VectorOp::isVector($v2)) {
 			$n = $v1->size();
 			if ($v2->size() != $n)
-				return new Pear_Error("Vectors must of the same size");
+				return new PEAR_Error("Vectors must of the same size");
 			for ($i=0; $i < $n; $i++)
 				$arr[$i] = $v1->get($i) * $v2->get($i);
 			return new Math_Vector($arr);
 		} else {
-			return new Pear_Error("V1 and V2 must be Math_Vector objects");
+			return new PEAR_Error("V1 and V2 must be Math_Vector objects");
 		}
 	}/*}}}*/
 
@@ -233,7 +233,7 @@ class Math_VectorOp {
 	 * @access	public
 	 * @param	numeric	$f	scaling factor
 	 * @param	object	Math_Vector (or subclass)	$v
-	 * @return	object	Math_Vector (or subclass) on success, Pear_Error otherwise
+	 * @return	object	Math_Vector (or subclass) on success, PEAR_Error otherwise
 	 *
 	 * @see 	isVector()
 	 */
@@ -245,7 +245,7 @@ class Math_VectorOp {
 				$arr[$i] = $v->get($i) * $f;
 			return new Math_Vector($arr);
 		} else {
-			return new Pear_Error("Requires a numeric factor and a Math_Vector object");
+			return new PEAR_Error("Requires a numeric factor and a Math_Vector object");
 		}
 	}/*}}}*/
 
@@ -256,7 +256,7 @@ class Math_VectorOp {
 	 * @access	public
 	 * @param	object	Math_Vector (or subclass)	$v1
 	 * @param	object	Math_Vector (or subclass)	$v2
-	 * @return	object	Math_Vector (or subclass) on success, Pear_Error otherwise
+	 * @return	object	Math_Vector (or subclass) on success, PEAR_Error otherwise
 	 *
 	 * @see 	isVector()
 	 */
@@ -265,16 +265,16 @@ class Math_VectorOp {
 		if (Math_VectorOp::isVector($v1) && Math_VectorOp::isVector($v2)) {
 			$n = $v1->size();
 			if ($v2->size() != $n)
-				return new Pear_Error("Vectors must of the same size");
+				return new PEAR_Error("Vectors must of the same size");
 			for ($i=0; $i < $n; $i++) {
 				$d = $v2->get($i);
 				if ($d == 0)
-					return new Pear_Error("Division by zero: Element $i in V2 is zero");
+					return new PEAR_Error("Division by zero: Element $i in V2 is zero");
 				$arr[$i] = $v1->get($i) / $d;
 			}
 			return new Math_Vector($arr);
 		} else {
-			return new Pear_Error("V1 and V2 must be Math_Vector objects");
+			return new PEAR_Error("V1 and V2 must be Math_Vector objects");
 		}
 	}/*}}}*/
 
@@ -284,7 +284,7 @@ class Math_VectorOp {
 	 * @access	public
 	 * @param	object	Math_Vector2 or MathVector3 (or subclass)	$v1
 	 * @param	object	Math_Vector2 or MathVector3 (or subclass)	$v2
-	 * @return	mixed	the dot product (float) on success, a Pear_Error object otherwise
+	 * @return	mixed	the dot product (float) on success, a PEAR_Error object otherwise
 	 *
 	 * @see 	isVector2()
 	 * @see		isVector3()
@@ -299,7 +299,7 @@ class Math_VectorOp {
 					 $v1->getY() * $v2->getY() +
 					 $v1->getZ() * $v2->getZ() );
 		else
-			return new Pear_Error("Vectors must be both of the same type");
+			return new PEAR_Error("Vectors must be both of the same type");
 	}/*}}}*/
 
 	/**
@@ -308,7 +308,7 @@ class Math_VectorOp {
 	 * @access	public
 	 * @param	object	Math_Vector3 (or subclass)	$v1
 	 * @param	object	Math_Vector3 (or subclass)	$v2
-	 * @return	object	the cross product vector (Math_Vector3) on success, a Pear_Error object otherwise
+	 * @return	object	the cross product vector (Math_Vector3) on success, a PEAR_Error object otherwise
 	 *
 	 * @see		isVector3()
 	 */
@@ -320,7 +320,7 @@ class Math_VectorOp {
 			$arr[2] = $v1->getX() * $v2->getY() - $v1->getY() * $v2->getX();
 			return new Math_Vector3($arr);
 		} else {
-			return new Pear_Error("Vectors must be both of the same type");
+			return new PEAR_Error("Vectors must be both of the same type");
 		}
 	}
 
@@ -331,7 +331,7 @@ class Math_VectorOp {
 	 * @param	object	Math_Vector3 (or subclass)	$v1
 	 * @param	object	Math_Vector3 (or subclass)	$v2
 	 * @param	object	Math_Vector3 (or subclass)	$v3
-	 * @return	mixed	the triple scalar product (float) on success, a Pear_Error object otherwise
+	 * @return	mixed	the triple scalar product (float) on success, a PEAR_Error object otherwise
 	 *
 	 * @see		isVector3()
 	 * @see		dotProduct()
@@ -344,7 +344,7 @@ class Math_VectorOp {
 			&& Math_VectorOp::isVector3($v3))
 			return Math_VectorOp::dotProduct($v1,Math_VectorOp::crossProduct($v2, $v3));
 		else
-			return Pear_Error("All three vectors must be of the same type");
+			return PEAR_Error("All three vectors must be of the same type");
 	}/*}}}*/
 
 	/**
@@ -353,7 +353,7 @@ class Math_VectorOp {
 	 * @access	public
 	 * @param	object	Math_Vector2 or MathVector3 (or subclass)	$v1
 	 * @param	object	Math_Vector2 or MathVector3 (or subclass)	$v2
-	 * @return	mixed	the angle between vectors (float, in radians) on success, a Pear_Error object otherwise
+	 * @return	mixed	the angle between vectors (float, in radians) on success, a PEAR_Error object otherwise
 	 *
 	 * @see 	isVector2()
 	 * @see		isVector3()
@@ -367,7 +367,7 @@ class Math_VectorOp {
 			$v2->normalize();
 			return acos( Math_VectorOp::dotProduct($v1,$v2) );
 		} else {
-			return new Pear_Error("Vectors must be both of the same type");
+			return new PEAR_Error("Vectors must be both of the same type");
 		}
 	}/*}}}*/
 
