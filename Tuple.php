@@ -53,17 +53,18 @@ class Math_Tuple {
 		if (is_array($data) || !is_array($data[0])) {
 			$this->data = $data;
 		} else {
-			return new PEAR_Error("An unidimensional array is needed to initialize a Vector");
+			new PEAR_Error("An unidimensional array is needed to initialize a Tuple",
+								null, PEAR_ERROR_DIE);
 		}
 	}/*}}}*/
 
 	/**
-	 * Compact the tuple removing holes in the sequence
+	 * Squeezes out holes in the tuple sequence
 	 *
 	 * @access	public
 	 * @return	void
 	 */
-	function compact ()/*{{{*/
+	function squeezeHoles ()/*{{{*/
 	{
 		$this->data = explode(":", implode(":",$this->data));
 	}/*}}}*/
@@ -125,7 +126,7 @@ class Math_Tuple {
 			return new PEAR_Error("Wrong index: $elindex, element not deleted");
 		}
 		unset($this->data[$elindex]);
-		$this->compact();
+		$this->squeezeHoles();
 		return true;
 	}/*}}}*/
 
@@ -152,7 +153,7 @@ class Math_Tuple {
 	 */
 	function getData () /*{{{*/
 	{
-		$this->compact();
+		$this->squeezeHoles();
 		return $this->data;
 	}/*}}}*/
 	
