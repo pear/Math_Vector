@@ -91,7 +91,7 @@ class Math_Tuple {
 	function setElement ($elindex, $elvalue) /*{{{*/
 	{
 		if ($elindex >= $this->getSize()) {
-			return new PEAR_Error("Wrong index: $elindex for element: $elvalue");
+			return PEAR::raiseError("Wrong index: $elindex for element: $elvalue");
 		}
 		$this->data[$elindex] = $elvalue;
 		return true;
@@ -107,7 +107,7 @@ class Math_Tuple {
 	function addElement ($elvalue) /*{{{*/
 	{
 		if (!is_numeric($elvalue)) {
-			return new PEAR_Error("Error, a numeric value is needed. You used: $elvalue");
+			return PEAR::raiseError("Error, a numeric value is needed. You used: $elvalue");
 		}
 		$this->data[$this->getSize()] = $elvalue;
 		return ($this->getSize() - 1);
@@ -123,7 +123,7 @@ class Math_Tuple {
 	function delElement ($elindex) /*{{{*/
 	{
 		if ($elindex >= $this->getSize()) {
-			return new PEAR_Error("Wrong index: $elindex, element not deleted");
+			return PEAR::raiseError("Wrong index: $elindex, element not deleted");
 		}
 		unset($this->data[$elindex]);
 		$this->squeezeHoles();
@@ -140,7 +140,7 @@ class Math_Tuple {
 	function getElement($elindex) /*{{{*/
 	{
 		if ($elindex >= $this->getSize()) {
-			return new PEAR_Error("Wrong index: $elindex, Tuple size is: ".$this->getSize());
+			return PEAR::raiseError("Wrong index: $elindex, Tuple size is: ".$this->getSize());
 		}
 		return $this->data[$elindex];
 	}/*}}}*/

@@ -142,7 +142,7 @@ class Math_VectorOp {
 	function createBasis ($size, $index) /*{{{*/
 	{
 		if ($index >= $size)
-			return new PEAR_Error("Incorrect index for size: $index >= $size");
+			return PEAR::raiseError("Incorrect index for size: $index >= $size");
 		$v = Math_VectorOp::createZero($size);
 		$res =$v->set($index, 1);
 		if (PEAR::isError($res))
@@ -167,12 +167,12 @@ class Math_VectorOp {
 		if (Math_VectorOp::isVector($v1) && Math_VectorOp::isVector($v2)) {
 			$n = $v1->size();
 			if ($v2->size() != $n)
-				return new PEAR_Error("Vectors must of the same size");
+				return PEAR::raiseError("Vectors must of the same size");
 			for ($i=0; $i < $n; $i++)
 				$arr[$i] = $v1->get($i) + $v2->get($i);
 			return new Math_Vector($arr);
 		} else {
-			return new PEAR_Error("V1 and V2 must be Math_Vector objects");
+			return PEAR::raiseError("V1 and V2 must be Math_Vector objects");
 		}
 	}/*}}}*/
 
@@ -192,12 +192,12 @@ class Math_VectorOp {
 		if (Math_VectorOp::isVector($v1) && Math_VectorOp::isVector($v2)) {
 			$n = $v1->size();
 			if ($v2->size() != $n)
-				return new PEAR_Error("Vectors must of the same size");
+				return PEAR::raiseError("Vectors must of the same size");
 			for ($i=0; $i < $n; $i++)
 				$arr[$i] = $v1->get($i) - $v2->get($i);
 			return new Math_Vector($arr);
 		} else {
-			return new PEAR_Error("V1 and V2 must be Math_Vector objects");
+			return PEAR::raiseError("V1 and V2 must be Math_Vector objects");
 		}
 	}/*}}}*/
 
@@ -217,12 +217,12 @@ class Math_VectorOp {
 		if (Math_VectorOp::isVector($v1) && Math_VectorOp::isVector($v2)) {
 			$n = $v1->size();
 			if ($v2->size() != $n)
-				return new PEAR_Error("Vectors must of the same size");
+				return PEAR::raiseError("Vectors must of the same size");
 			for ($i=0; $i < $n; $i++)
 				$arr[$i] = $v1->get($i) * $v2->get($i);
 			return new Math_Vector($arr);
 		} else {
-			return new PEAR_Error("V1 and V2 must be Math_Vector objects");
+			return PEAR::raiseError("V1 and V2 must be Math_Vector objects");
 		}
 	}/*}}}*/
 
@@ -245,7 +245,7 @@ class Math_VectorOp {
 				$arr[$i] = $v->get($i) * $f;
 			return new Math_Vector($arr);
 		} else {
-			return new PEAR_Error("Requires a numeric factor and a Math_Vector object");
+			return PEAR::raiseError("Requires a numeric factor and a Math_Vector object");
 		}
 	}/*}}}*/
 
@@ -265,16 +265,16 @@ class Math_VectorOp {
 		if (Math_VectorOp::isVector($v1) && Math_VectorOp::isVector($v2)) {
 			$n = $v1->size();
 			if ($v2->size() != $n)
-				return new PEAR_Error("Vectors must of the same size");
+				return PEAR::raiseError("Vectors must of the same size");
 			for ($i=0; $i < $n; $i++) {
 				$d = $v2->get($i);
 				if ($d == 0)
-					return new PEAR_Error("Division by zero: Element $i in V2 is zero");
+					return PEAR::raiseError("Division by zero: Element $i in V2 is zero");
 				$arr[$i] = $v1->get($i) / $d;
 			}
 			return new Math_Vector($arr);
 		} else {
-			return new PEAR_Error("V1 and V2 must be Math_Vector objects");
+			return PEAR::raiseError("V1 and V2 must be Math_Vector objects");
 		}
 	}/*}}}*/
 
@@ -299,7 +299,7 @@ class Math_VectorOp {
 					 $v1->getY() * $v2->getY() +
 					 $v1->getZ() * $v2->getZ() );
 		else
-			return new PEAR_Error("Vectors must be both of the same type");
+			return PEAR::raiseError("Vectors must be both of the same type");
 	}/*}}}*/
 
 	/**
@@ -320,7 +320,7 @@ class Math_VectorOp {
 			$arr[2] = $v1->getX() * $v2->getY() - $v1->getY() * $v2->getX();
 			return new Math_Vector3($arr);
 		} else {
-			return new PEAR_Error("Vectors must be both of the same type");
+			return PEAR::raiseError("Vectors must be both of the same type");
 		}
 	}
 
@@ -367,7 +367,7 @@ class Math_VectorOp {
 			$v2->normalize();
 			return acos( Math_VectorOp::dotProduct($v1,$v2) );
 		} else {
-			return new PEAR_Error("Vectors must be both of the same type");
+			return PEAR::raiseError("Vectors must be both of the same type");
 		}
 	}/*}}}*/
 

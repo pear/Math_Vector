@@ -35,7 +35,7 @@ class Math_CompactedTuple {
 			$msg = "Incorrect parameter for Math_CompactedTuple constructor. ".
 					"Expecting an unidimensional array or a Math_Tuple object,". 
 					" got '$arg'\n";
-			new PEAR_Error($msg, null, PEAR_ERROR_DIE);
+			PEAR::raiseError($msg);
 		}
 		return true;
 	}
@@ -67,7 +67,7 @@ class Math_CompactedTuple {
 				unset ($this->data[$value]);
 			return true;
 		}
-		return new PEAR_Error("value does not exist in compacted tuple");
+		return PEAR::raiseError("value does not exist in compacted tuple");
 	}
 
 	function hasElement($value) {

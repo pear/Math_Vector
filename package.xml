@@ -22,11 +22,16 @@
 
   <release>
     <license>PHP</license>
-    <version>0.5.1</version>
-    <date>2002-07-30</date>
+    <version>0.6.0</version>
+    <date>2002-08-19</date>
     <state>beta</state>
     <notes>
-	 Fixed capitalization of PEAR_Error
+	 Some other class name capitalization fixes.
+	 Using PEAR::raiseError() instead of creating a new PEAR_Error object
+	 Added new distance metrics between vectors: Manhattan (aka city) distance
+	 and Chessboard distance.
+	 Changed examples/vector_creation.php to show the use of the new distance
+	 metrics.
     </notes>
     <filelist>
       <dir name="/" baseinstalldir="Math/Vector">

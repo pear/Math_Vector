@@ -190,7 +190,7 @@ class Math_Vector {
 			for ($i=0; $i < $n; $i++)
 				$this->set($i, $this->get($i) * $f);
 		} else {
-			return new PEAR_Error("Requires a numeric factor and a Math_Vector object");
+			return PEAR::raiseError("Requires a numeric factor and a Math_Vector object");
 		}
 	}/*}}}*/
 
@@ -205,7 +205,7 @@ class Math_Vector {
 	function set($i, $value) /*{{{*/
 	{
 		$res = $this->tuple->setElement($i, $value);
-		if (Pear::isError($res))
+		if (PEAR::isError($res))
 			return $res;
 		else
 			return true;
@@ -227,24 +227,96 @@ class Math_Vector {
 	 * Returns the distance to another vector
 	 *
 	 * @access	public
-	 * @param	object	Math_Vector
-	 * @return	float
+	 * @param	object	$vector Math_Vector object
+	 * @param   string	$type	distance type: cartesian (default), manhattan or chessboard
+	 * @return	float on success, a PEAR_Error object on failure
 	 */
-	function distance($vector)/*{{{*/
+	function distance($vector, $type='cartesian')/*{{{*/
+	{
+		switch ($type) {
+			case 'manhattan' :
+			case 'city' :
+				return $this->manhattanDistance($vector);
+				break;
+			case 'chessboard' :
+				return $this->chessboardDistance($vector);
+				break;
+			case 'cartesian' :
+			default :
+				return $this->cartesianDistance($vector);
+		}
+	}/*}}}*/
+
+	/**
+	 * Returns the cartesian distance to another vector
+	 *
+	 * @access	public
+	 * @param	object	$vector Math_Vector object
+	 * @return	float on success, a PEAR_Error object on failure
+	 */
+	function cartesianDistance($vector) /*{{{*/
 	{
 		$n = $this->size();
 		$sum = 0;
 		if (Math_VectorOp::isVector($vector))
 			if ($vector->size() == $n) {
 				for($i=0; $i < $n; $i++)
-					$sum += pow(($this->tuple->getElement($i) -
-						$vector->tuple->getElement($i)), 2);
+					$sum += pow(($this->tuple->getElement($i) - $vector->tuple->getElement($i)), 2);
 				return sqrt($sum);
 			} else {
-				return new PEAR_Error("Vector has to be of the same size");
+				return PEAR::raiseError("Vector has to be of the same size");
 			}
 		else
-			return new PEAR_Error("Wrong parameter type, expecting a Math_Vector object");
+			return PEAR::raiseError("Wrong parameter type, expecting a Math_Vector object");
+	}/*}}}*/
+
+	/**
+	 * Returns the Manhattan (aka City) distance to another vector
+	 * Definition: manhattan dist. = |x1 - x2| + |y1 - y2| + ...
+	 *
+	 * @access	public
+	 * @param	object	$vector Math_Vector object
+	 * @return	float on success, a PEAR_Error object on failure
+	 */
+	function manhattanDistance($vector) /*{{{*/
+	{
+		$n = $this->size();
+		$sum = 0;
+		if (Math_VectorOp::isVector($vector))
+			if ($vector->size() == $n) {
+				for($i=0; $i < $n; $i++)
+					$sum += abs($this->tuple->getElement($i) - $vector->tuple->getElement($i));
+				return $sum;
+			} else {
+				return PEAR::raiseError("Vector has to be of the same size");
+			}
+		else
+			return PEAR::raiseError("Wrong parameter type, expecting a Math_Vector object");
+	}/*}}}*/
+
+	/**
+	 * Returns the Chessboard distance to another vector
+	 * Definition: chessboard dist. = max(|x1 - x2|, |y1 - y2|, ...)
+	 *
+	 * @access	public
+	 * @param	object	$vector Math_Vector object
+	 * @return	float on success, a PEAR_Error object on failure
+	 */
+	function chessboardDistance($vector) /*{{{*/
+	{
+		$n = $this->size();
+		$sum = 0;
+		if (Math_VectorOp::isVector($vector))
+			if ($vector->size() == $n) {
+				$cdist = array();
+				for($i=0; $i < $n; $i++)
+					$cdist[] = abs($this->tuple->getElement($i) - $vector->tuple->getElement($i));
+				return max($cdist);
+			} else {
+				return PEAR::raiseError("Vector has to be of the same size");
+			}
+		else
+			return PEAR::raiseError("Wrong parameter type, expecting a Math_Vector object");
 	}/*}}}*/
 
 	/**

@@ -22,8 +22,11 @@ echo $v->toString()."\n";
 
 echo "==\nVector from tuple\n";
 $w = new Math_Vector($t);
-echo "Distance(v,w) = ".$v->distance($w)."\n";
-echo $w->toString()."\n";
+echo "Cartesian distance(v,w) = ".$v->distance($w)."\n";
+echo "Manhattan distance(v,w) = ".$v->distance($w, 'manhattan')."\n";
+echo "Chessboard distance(v,w) = ".$v->distance($w, 'chessboard')."\n";
+echo "Vector v: ".$v->toString()."\n";
+echo "Vector w: ".$w->toString()."\n";
 
 echo "==\nVector from another vector\n";
 $z = new Math_Vector(new Math_Vector(range(2,5)));
