@@ -22,11 +22,11 @@
 
   <release>
     <license>PHP</license>
-    <version>0.5.0</version>
-    <date>2002-04-23</date>
+    <version>0.5.1</version>
+    <date>2002-07-30</date>
     <state>beta</state>
     <notes>
-	 Initial release
+	 Fixed capitalization of PEAR_Error
     </notes>
     <filelist>
       <dir name="/" baseinstalldir="Math/Vector">
@@ -43,5 +43,25 @@
       </dir>
     </filelist>
   </release>
+  <changelog>
+	<release>
+      <license>PHP</license>
+      <version>0.5.0</version>
+      <date>2002-04-23</date>
+      <state>beta</state>
+      <notes>
+	   Initial release
+      </notes>
+	</release>
+	<release>
+      <license>PHP</license>
+      <version>0.5.1</version>
+      <date>2002-07-30</date>
+      <state>beta</state>
+      <notes>
+	   Fixed capitalization of PEAR_Error
+      </notes>
+	</release>
+  </changelog>
 
 </package>
