@@ -35,7 +35,7 @@
 	  	<file role="php">Vector2.php</file>
 	  	<file role="php">Vector3.php</file>
 	  	<file role="php">VectorOp.php</file>
-        <dir name="tests" role="test">
+        <dir name="examples" role="example">
           <file role="php">tuple_creation.php</file>
           <file role="php">vector_creation.php</file>
           <file role="php">vector_operations.php</file>
