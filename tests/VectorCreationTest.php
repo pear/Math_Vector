@@ -3,7 +3,7 @@
 require_once "Math/Vector/Vector.php";
 require_once "Math/Vector/Vector2.php";
 require_once "Math/Vector/Vector3.php";
-require_once "PHPUnit/PHPUnit.php";
+require_once "PHPUnit.php";
 
 class VectorCreationTest extends PHPUnit_TestCase {
 	var $v;
