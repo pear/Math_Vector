@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE package SYSTEM "../package.dtd">
+<!-- do not use the "Type" attribute here, that one is only for
+     generated package.xml files -->
+<package>
+
+  <name>Math_Vector</name>
+  <summary>Vector and vector operation classes</summary>
+  <description>
+   Classes to represent Tuples, general Vectors, and 2D-/3D-vectors,
+   as well as a static class for vector operations.
+  </description>
+
+  <maintainers>
+    <maintainer>
+      <user>jmcastagnetto</user>
+      <name>Jesus M. Castagnetto</name>
+      <email>jmcastagnetto@php.net</email>
+      <role>lead</role>
+    </maintainer>
+  </maintainers>
+
+  <release>
+    <license>PHP</license>
+    <version>0.5.0</version>
+    <date>2002-04-23</date>
+    <state>beta</state>
+    <notes>
+	 Initial release
+    </notes>
+    <filelist>
+      <dir name="/" baseinstalldir="Math/Vector">
+	  	<file role="php">Tuple.php</file>
+	  	<file role="php">Vector.php</file>
+	  	<file role="php">Vector2.php</file>
+	  	<file role="php">Vector3.php</file>
+	  	<file role="php">VectorOp.php</file>
+        <dir name="tests" role="test">
+          <file role="php">tuple_creation.php</file>
+          <file role="php">vector_creation.php</file>
+          <file role="php">vector_operations.php</file>
+        </dir>
+      </dir>
+    </filelist>
+  </release>
+
+</package>
