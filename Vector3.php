@@ -42,10 +42,10 @@ class Math_Vector3 extends Math_Vector {
 	function Math_Vector3($arg) {
 		if ( is_array($arg) && count($arg) != 3 )
 			$this->tuple = null;
-		elseif ( is_object($arg) && (get_class($arg) != "math_vector3" 
-					&& get_class($arg) != "math_tuple") )  
+		elseif ( is_object($arg) && (strtolower(get_class($arg)) != "math_vector3" 
+					&& strtolower(get_class($arg)) != "math_tuple") )  
 			$this->tuple = null;
-		elseif ( is_object($arg) && get_class($arg) == "math_tuple" 
+		elseif ( is_object($arg) && strtolower(get_class($arg)) == "math_tuple" 
 				&& $arg->getSize() != 3 ) 
 			$this->tuple = null;
 		else

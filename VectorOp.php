@@ -43,7 +43,7 @@ class Math_VectorOp {
 		if (function_exists("is_a"))
 			return (is_object($obj) && is_a($obj, "Math_Vector"));
 		else
-			return (is_object($obj) && (get_class($obj) == "math_vector" || 
+			return (is_object($obj) && (strtolower(get_class($obj)) == "math_vector" || 
 						is_subclass_of($obj, "Math_Vector")));
 	}/*}}}*/
 
@@ -59,7 +59,7 @@ class Math_VectorOp {
 		if (function_exists("is_a"))
 			return (is_object($obj) && is_a($obj, "Math_Vector2"));
 		else
-			return (is_object($obj) && (get_class($obj) == "math_vector2" ||
+			return (is_object($obj) && (strtolower(get_class($obj)) == "math_vector2" ||
 				is_subclass_of($obj, "Math_Vector2")));
 	}/*}}}*/
 
@@ -75,7 +75,7 @@ class Math_VectorOp {
 		if (function_exists("is_a"))
 			return (is_object($obj) && is_a($obj, "Math_Vector3"));
 		else
-			return (is_object($obj) && (get_class($obj) == "math_vector3" ||
+			return (is_object($obj) && (strtolower(get_class($obj)) == "math_vector3" ||
 					is_subclass_of($obj, "Math_Vector3")) );
 	}/*}}}*/
 

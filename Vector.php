@@ -69,9 +69,9 @@ class Math_Vector {
     {
 		if (is_array($data)) {
 			$tuple = new Math_Tuple($data);
-        } elseif (is_object($data) && get_class($data) == "math_tuple") {
+        } elseif (is_object($data) && strtolower(get_class($data)) == "math_tuple") {
 			$tuple = $data;
-        } else if (is_object($data) && get_class($data) == "math_vector") {
+        } else if (is_object($data) && strtolower(get_class($data)) == "math_vector") {
 			$tuple = $data->getTuple();
         } else {
 			return PEAR::raiseError('Cannot initialize, expecting an array, tuple or vector');
@@ -105,7 +105,7 @@ class Math_Vector {
 	function isValid() /*{{{*/
 	{
 		return (!is_null($this->_tuple) && is_object($this->_tuple) &&
-				get_class($this->_tuple) == "math_tuple");
+				strtolower(get_class($this->_tuple)) == "math_tuple");
 	}/*}}}*/
 
 	/**
