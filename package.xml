@@ -26,7 +26,7 @@
     <date>2002-08-19</date>
     <state>beta</state>
     <notes>
-	 Some other class name capitalization fixes.
+	 More class name capitalization fixes.
 	 Using PEAR::raiseError() instead of creating a new PEAR_Error object
 	 Added new distance metrics between vectors: Manhattan (aka city) distance
 	 and Chessboard distance.
@@ -45,6 +45,10 @@
           <file role="php">vector_creation.php</file>
           <file role="php">vector_operations.php</file>
         </dir>
+		<dir name="tests" role="test">
+		 <file role="php">TupleCreationTest.php</file>
+		 <file role="php">VectorCreationTest.php</file>
+		</dir>
       </dir>
     </filelist>
   </release>
