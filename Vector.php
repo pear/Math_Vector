@@ -41,28 +41,61 @@ class Math_Vector {
 	 * @var		object	Math_Tuple
 	 * @access	private
 	 */
-	var $tuple;
+	var $_tuple = null;
 
 	/**
 	 * Constructor for Math_Vector
 	 *
-	 * @param	mixed	$data	a Math_Tuple object, a Math_Vetctor object, or an array of numeric data
+	 * @param	optional array|Math_Tuple|Math_Vector	$data	a Math_Tuple object, a Math_Vetctor object, or an array of numeric data
 	 * @access	public
 	 * @return	object	Math_Vector (or PEAR_Error on error)
+     * @see setData()
 	 */
-	function Math_Vector($data) /*{{{*/
+	function Math_Vector($data=null) /*{{{*/
 	{
-		if (is_array($data))
-			$tuple = new Math_Tuple($data);
-		else if (is_object($data) && get_class($data) == "math_tuple")
-			$tuple = $data;
-		else if (is_object($data) && get_class($data) == "math_vector")
-			$tuple = $data->getTuple();
-		else
-			$tuple = null;
-		$this->tuple = $tuple;
+        if (!is_null($data)) {
+            $this->setData($data);
+        }
 	}/*}}}*/
 
+	/**
+	 * Initializes the vector
+	 *
+	 * @param	array|Math_Tuple|Math_Vector	$data	a Math_Tuple object, a Math_Vetctor object, or an array of numeric data
+	 * @access	public
+	 * @return	boolean|PEAR_Error TRUE on success, a PEAR_Error otherwise
+	 */
+    function setData($data) /*{{{*/
+    {
+		if (is_array($data)) {
+			$tuple = new Math_Tuple($data);
+        } elseif (is_object($data) && get_class($data) == "math_tuple") {
+			$tuple = $data;
+        } else if (is_object($data) && get_class($data) == "math_vector") {
+			$tuple = $data->getTuple();
+        } else {
+			return PEAR::raiseError('Cannot initialize, expecting an array, tuple or vector');
+        }
+		$this->_tuple = $tuple;
+        return true;
+    }/*}}}*/
+
+
+    /**
+     * Returns an array of numbers
+     *
+     * @access public
+     * @return array|PEAR_Error a numeric array on success, a PEAR_Error otherwise
+     */
+    function getData()/*{{{*/
+    {
+        if ($this->isValid()) {
+            return $this->_tuple->getData();
+        } else {
+            return PEAR::raiseError('Vector has not been initialized');
+        }
+    }/*}}}*/
+    
 	/**
 	 * Checks if the vector has been correctly initialized
 	 *
@@ -71,8 +104,8 @@ class Math_Vector {
 	 */
 	function isValid() /*{{{*/
 	{
-		return (!is_null($this->tuple) && is_object($this->tuple) &&
-				get_class($this->tuple) == "math_tuple");
+		return (!is_null($this->_tuple) && is_object($this->_tuple) &&
+				get_class($this->_tuple) == "math_tuple");
 	}/*}}}*/
 
 	/**
@@ -86,7 +119,7 @@ class Math_Vector {
 		$n = $this->size();
 		$sum = 0;
 		for ($i=0; $i < $n; $i++)
-			$sum += pow($this->tuple->getElement($i), 2);
+			$sum += pow($this->_tuple->getElement($i), 2);
 		return $sum;
 	}/*}}}*/
 
@@ -123,7 +156,7 @@ class Math_Vector {
 		$n = $this->size();
 		$length = $this->length();
 		for ($i=0; $i < $n; $i++) {
-			$this->tuple->setElement($i, $this->tuple->getElement($i)/$length);
+			$this->_tuple->setElement($i, $this->_tuple->getElement($i)/$length);
 		}
 	}/*}}}*/
 
@@ -135,7 +168,7 @@ class Math_Vector {
 	 */
 	function getTuple() /*{{{*/
 	{
-		return $this->tuple;
+		return $this->_tuple;
 	}/*}}}*/
 
 	/**
@@ -146,7 +179,7 @@ class Math_Vector {
 	 */
 	function size() /*{{{*/
 	{
-		return $this->tuple->getSize();
+		return $this->_tuple->getSize();
 	}/*}}}*/
 
 	/**
@@ -159,7 +192,7 @@ class Math_Vector {
 	{
 		$n = $this->size();
 		for ($i=0; $i < $n; $i++)
-			$this->tuple->setElement($i, -1 * $this->tuple->getElement($i));
+			$this->_tuple->setElement($i, -1 * $this->_tuple->getElement($i));
 	}/*}}}*/
 
 	/**
@@ -204,7 +237,7 @@ class Math_Vector {
 	 */
 	function set($i, $value) /*{{{*/
 	{
-		$res = $this->tuple->setElement($i, $value);
+		$res = $this->_tuple->setElement($i, $value);
 		if (PEAR::isError($res))
 			return $res;
 		else
@@ -219,7 +252,7 @@ class Math_Vector {
 	 * @return	mixed	the element value (numeric) on success, a PEAR_Error object otherwise
 	 */
 	function get($i) {/*{{{*/
-		$res = $this->tuple->getElement($i);
+		$res = $this->_tuple->getElement($i);
 		return $res;
 	}/*}}}*/
 
@@ -261,7 +294,7 @@ class Math_Vector {
 		if (Math_VectorOp::isVector($vector))
 			if ($vector->size() == $n) {
 				for($i=0; $i < $n; $i++)
-					$sum += pow(($this->tuple->getElement($i) - $vector->tuple->getElement($i)), 2);
+					$sum += pow(($this->_tuple->getElement($i) - $vector->_tuple->getElement($i)), 2);
 				return sqrt($sum);
 			} else {
 				return PEAR::raiseError("Vector has to be of the same size");
@@ -285,7 +318,7 @@ class Math_Vector {
 		if (Math_VectorOp::isVector($vector))
 			if ($vector->size() == $n) {
 				for($i=0; $i < $n; $i++)
-					$sum += abs($this->tuple->getElement($i) - $vector->tuple->getElement($i));
+					$sum += abs($this->_tuple->getElement($i) - $vector->_tuple->getElement($i));
 				return $sum;
 			} else {
 				return PEAR::raiseError("Vector has to be of the same size");
@@ -310,7 +343,7 @@ class Math_Vector {
 			if ($vector->size() == $n) {
 				$cdist = array();
 				for($i=0; $i < $n; $i++)
-					$cdist[] = abs($this->tuple->getElement($i) - $vector->tuple->getElement($i));
+					$cdist[] = abs($this->_tuple->getElement($i) - $vector->_tuple->getElement($i));
 				return max($cdist);
 			} else {
 				return PEAR::raiseError("Vector has to be of the same size");
@@ -327,7 +360,7 @@ class Math_Vector {
 	 */
 	function toString() /*{{{*/
 	{
-		return "Vector: < ".implode(", ",$this->tuple->getData())." >";
+		return "Vector: < ".implode(", ",$this->_tuple->getData())." >";
 	}/*}}}*/
 }
 

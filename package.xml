@@ -22,55 +22,73 @@
 
   <release>
     <license>PHP</license>
-    <version>0.6.0</version>
-    <date>2002-08-19</date>
+    <version>0.6.2</version>
+    <date>2003-11-01</date>
     <state>beta</state>
     <notes>
-	 More class name capitalization fixes.
-	 Using PEAR::raiseError() instead of creating a new PEAR_Error object
-	 Added new distance metrics between vectors: Manhattan (aka city) distance
-	 and Chessboard distance.
-	 Changed examples/vector_creation.php to show the use of the new distance
-	 metrics.
+<![CDATA[
+     Made the data in the constructor optional. Added setData() and
+     getData() methods to handle vector initialization.
+
+     Reorganized the directories for tests and documentation. It is 
+     recommended to uninstall Math_Vector before installing this release
+     to avoid lingering files:
+
+     $ pear uninstall Math_Vector
+     $ pear install Math_Vector
+]]>
     </notes>
     <filelist>
-      <dir name="/" baseinstalldir="Math/Vector">
-	  	<file role="php">Tuple.php</file>
-	  	<file role="php">Vector.php</file>
-	  	<file role="php">Vector2.php</file>
-	  	<file role="php">Vector3.php</file>
-	  	<file role="php">VectorOp.php</file>
-        <dir name="examples" role="example">
-          <file role="php">tuple_creation.php</file>
-          <file role="php">vector_creation.php</file>
-          <file role="php">vector_operations.php</file>
-        </dir>
-		<dir name="tests" role="test">
-		 <file role="php">TupleCreationTest.php</file>
-		 <file role="php">VectorCreationTest.php</file>
-		</dir>
+     <dir name="/" baseinstalldir="Math/Vector">
+      <file role="php">Tuple.php</file>
+      <file role="php">Vector.php</file>
+      <file role="php">Vector2.php</file>
+      <file role="php">Vector3.php</file>
+      <file role="php">VectorOp.php</file>
+      <dir name="tests" role="test">
+       <file role="php">TupleCreationTest.php</file>
+       <file role="php">VectorCreationTest.php</file>
+       <dir name="examples" role="example">
+        <file role="php">tuple_creation.php</file>
+        <file role="php">vector_creation.php</file>
+        <file role="php">vector_operations.php</file>
+       </dir>
       </dir>
+     </dir>
     </filelist>
   </release>
   <changelog>
-	<release>
+   <release>
+     <version>0.6.0</version>
+     <date>2002-08-19</date>
+     <state>beta</state>
+     <notes>
+   More class name capitalization fixes.
+   Using PEAR::raiseError() instead of creating a new PEAR_Error object
+   Added new distance metrics between vectors: Manhattan (aka city) distance
+   and Chessboard distance.
+   Changed examples/vector_creation.php to show the use of the new distance
+   metrics.
+     </notes>
+   </release>
+ <release>
       <license>PHP</license>
       <version>0.5.1</version>
       <date>2002-07-30</date>
       <state>beta</state>
       <notes>
-	   Fixed capitalization of PEAR_Error
+    Fixed capitalization of PEAR_Error
       </notes>
-	</release>
-	<release>
+ </release>
+ <release>
       <license>PHP</license>
       <version>0.5.0</version>
       <date>2002-04-23</date>
       <state>beta</state>
       <notes>
-	   Initial release
+    Initial release
       </notes>
-	</release>
+ </release>
   </changelog>
 
 </package>
