@@ -116,7 +116,7 @@ class Math_Vector {
 	 * Normalizes the vector, converting it to a unit vector
 	 *
 	 * @access	public
-	 * @returns	void
+	 * @return	void
 	 */
 	function normalize() /*{{{*/
 	{
@@ -131,7 +131,7 @@ class Math_Vector {
 	 * returns the Math_Tuple object corresponding to the vector
 	 *
 	 * @access	public
-	 * @returns	object	Math_Tuple
+	 * @return	object	Math_Tuple
 	 */
 	function getTuple() /*{{{*/
 	{
@@ -142,7 +142,7 @@ class Math_Vector {
 	 * Returns the number of elements (dimensions) of the vector
 	 *
 	 * @access	public
-	 * @returns	float
+	 * @return	float
 	 */
 	function size() /*{{{*/
 	{
