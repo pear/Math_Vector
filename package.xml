@@ -36,6 +36,9 @@
 
      $ pear uninstall Math_Vector
      $ pear install Math_Vector
+
+     Included explicit optional dependency on PHPUnit 0.6.2 or older. Newer
+     versions of PHPUnit require PHP5.
 ]]>
     </notes>
     <filelist>
@@ -56,6 +59,9 @@
       </dir>
      </dir>
     </filelist>
+    <deps>
+     <dep type="pkg" rel="le" version="0.6.2" optional="yes">PHPUnit</dep>
+    </deps>
   </release>
   <changelog>
    <release>
