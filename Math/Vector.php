@@ -20,8 +20,8 @@
 //
 
 require_once "PEAR.php";
-require_once "Math/Vector/Tuple.php";
-require_once "Math/Vector/VectorOp.php";
+require_once "Math/Tuple.php";
+require_once "Math/VectorOp.php";
 
 /**
  * General Vector class
@@ -95,7 +95,7 @@ class Math_Vector {
             return PEAR::raiseError('Vector has not been initialized');
         }
     }/*}}}*/
-    
+
 	/**
 	 * Checks if the vector has been correctly initialized
 	 *

@@ -1,100 +1,129 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
-<!DOCTYPE package SYSTEM "http://pear.php.net/dtd/package-1.0">
-<!-- do not use the "Type" attribute here, that one is only for
-     generated package.xml files -->
-<package>
-
-  <name>Math_Vector</name>
-  <summary>Vector and vector operation classes</summary>
-  <description>
-   Classes to represent Tuples, general Vectors, and 2D-/3D-vectors,
-   as well as a static class for vector operations.
-  </description>
-
-  <maintainers>
-    <maintainer>
-      <user>jmcastagnetto</user>
-      <name>Jesus M. Castagnetto</name>
-      <email>jmcastagnetto@php.net</email>
-      <role>lead</role>
-    </maintainer>
-  </maintainers>
-
+<?xml version="1.0" encoding="UTF-8"?>
+<package packagerversion="1.9.1" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
+ <name>Math_Vector</name>
+ <channel>pear.php.net</channel>
+ <summary>Vector and vector operation classes</summary>
+ <description>Classes to represent Tuples, general Vectors, and 2D-/3D-vectors,
+as well as a static class for vector operations.</description>
+ <lead>
+  <name>Jesus M. Castagnetto</name>
+  <user>jmcastagnetto</user>
+  <email>jmcastagnetto@php.net</email>
+  <active>yes</active>
+ </lead>
+ <date>2010-10-05</date>
+ <time>00:25:56</time>
+ <version>
+  <release>0.7.0</release>
+  <api>0.7.0</api>
+ </version>
+ <stability>
+  <release>beta</release>
+  <api>beta</api>
+ </stability>
+ <license uri="http://www.php.net/license">PHP</license>
+ <notes>
+QA Release
+Updated to PHPUnit 3.4+
+Fixed SVN layout
+Package 2.0
+BC break: require_once &apos;Math/Tuple.php&apos; now, instead of Math/Vector/Tuple.php
+ </notes>
+ <contents>
+  <dir baseinstalldir="/" name="/">
+   <file baseinstalldir="/" md5sum="ccbbf7a2693d0fc3b1608ea12a925e24" name="examples/tuple_creation.php" role="doc" />
+   <file baseinstalldir="/" md5sum="0810cac522c6a0a5692e6d57309d4044" name="examples/vector_creation.php" role="doc" />
+   <file baseinstalldir="/" md5sum="d97820198556207f4b6175b1b7ea08fd" name="examples/vector_operations.php" role="doc" />
+   <file baseinstalldir="/" md5sum="e540188fb21c35200ef38eda008a1a5b" name="Math/CompactedTuple.php" role="php" />
+   <file baseinstalldir="/" md5sum="1422ff36d9d27de1378743fc986782cb" name="Math/Tuple.php" role="php" />
+   <file baseinstalldir="/" md5sum="cdf83be9db5c5e74678d5666e836a9ec" name="Math/Vector.php" role="php" />
+   <file baseinstalldir="/" md5sum="b86f8d620364e8f6d20785c156c6f80f" name="Math/Vector2.php" role="php" />
+   <file baseinstalldir="/" md5sum="8c8b7a62bc57d7d6be90e564edbd707d" name="Math/Vector3.php" role="php" />
+   <file baseinstalldir="/" md5sum="1dc10235798b0f7cc17382889eea15a6" name="Math/VectorOp.php" role="php" />
+   <file baseinstalldir="/" md5sum="5ffb29f182e3e895b080043eb76fe5b7" name="tests/AllTests.php" role="test" />
+   <file baseinstalldir="/" md5sum="800918ee54229f7ca9cd31aa37c683e1" name="tests/Math_VectorTest.php" role="test" />
+  </dir>
+ </contents>
+ <dependencies>
+  <required>
+   <php>
+    <min>4.0.0</min>
+   </php>
+   <pearinstaller>
+    <min>1.4.0b1</min>
+   </pearinstaller>
+  </required>
+ </dependencies>
+ <phprelease />
+ <changelog>
   <release>
-    <license>PHP</license>
-    <version>0.6.2</version>
-    <date>2003-11-01</date>
-    <state>beta</state>
-    <notes>
-<![CDATA[
-     Made the data in the constructor optional. Added setData() and
-     getData() methods to handle vector initialization.
-
-     Reorganized the directories for tests and documentation. It is 
-     recommended to uninstall Math_Vector before installing this release
-     to avoid lingering files:
-
-     $ pear uninstall Math_Vector
-     $ pear install Math_Vector
-
-     Included explicit optional dependency on PHPUnit 0.6.2 or older. Newer
-     versions of PHPUnit require PHP5.
-]]>
-    </notes>
-    <filelist>
-     <dir name="/" baseinstalldir="Math/Vector">
-      <file role="php">Tuple.php</file>
-      <file role="php">Vector.php</file>
-      <file role="php">Vector2.php</file>
-      <file role="php">Vector3.php</file>
-      <file role="php">VectorOp.php</file>
-      <dir name="tests" role="test">
-       <file role="php">TupleCreationTest.php</file>
-       <file role="php">VectorCreationTest.php</file>
-       <dir name="examples" role="example">
-        <file role="php">tuple_creation.php</file>
-        <file role="php">vector_creation.php</file>
-        <file role="php">vector_operations.php</file>
-       </dir>
-      </dir>
-     </dir>
-    </filelist>
-    <deps>
-     <dep type="pkg" rel="le" version="0.6.2" optional="yes">PHPUnit</dep>
-    </deps>
+   <version>
+    <release>0.5.0</release>
+    <api>0.5.0</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>beta</api>
+   </stability>
+   <date>2002-04-23</date>
+   <license uri="http://www.php.net/license">PHP</license>
+   <notes>
+Initial release
+   </notes>
   </release>
-  <changelog>
-   <release>
-     <version>0.6.0</version>
-     <date>2002-08-19</date>
-     <state>beta</state>
-     <notes>
-   More class name capitalization fixes.
-   Using PEAR::raiseError() instead of creating a new PEAR_Error object
-   Added new distance metrics between vectors: Manhattan (aka city) distance
-   and Chessboard distance.
-   Changed examples/vector_creation.php to show the use of the new distance
-   metrics.
-     </notes>
-   </release>
- <release>
-      <license>PHP</license>
-      <version>0.5.1</version>
-      <date>2002-07-30</date>
-      <state>beta</state>
-      <notes>
-    Fixed capitalization of PEAR_Error
-      </notes>
- </release>
- <release>
-      <license>PHP</license>
-      <version>0.5.0</version>
-      <date>2002-04-23</date>
-      <state>beta</state>
-      <notes>
-    Initial release
-      </notes>
- </release>
-  </changelog>
-
+  <release>
+   <version>
+    <release>0.5.1</release>
+    <api>0.5.1</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>beta</api>
+   </stability>
+   <date>2002-07-30</date>
+   <license uri="http://www.php.net/license">PHP</license>
+   <notes>
+Fixed capitalization of PEAR_Error
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>0.6.0</release>
+    <api>0.6.0</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>beta</api>
+   </stability>
+   <date>2002-08-19</date>
+   <license uri="http://www.php.net/license">PHP</license>
+   <notes>
+More class name capitalization fixes.
+Using PEAR::raiseError() instead of creating a new PEAR_Error object
+Added new distance metrics between vectors: Manhattan (aka city) distance
+and Chessboard distance.
+Changed examples/vector_creation.php to show the use of the new distance
+metrics.
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>0.7.0</release>
+    <api>0.7.0</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>beta</api>
+   </stability>
+   <date>2010-10-05</date>
+   <license uri="http://www.php.net/license">PHP</license>
+   <notes>
+QA Release
+Updated to PHPUnit 3.4+
+Fixed SVN layout
+Package 2.0
+BC break: require_once &apos;Math/Tuple.php&apos; now, instead of Math/Vector/Tuple.php
+   </notes>
+  </release>
+ </changelog>
 </package>

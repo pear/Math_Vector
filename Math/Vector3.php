@@ -20,7 +20,7 @@
 //
 
 
-require_once "Math/Vector/Vector.php";
+require_once "Math/Vector.php";
 
 /**
  * 3D vector class
@@ -42,11 +42,11 @@ class Math_Vector3 extends Math_Vector {
 	function Math_Vector3($arg) {
 		if ( is_array($arg) && count($arg) != 3 )
 			$this->tuple = null;
-		elseif ( is_object($arg) && (strtolower(get_class($arg)) != "math_vector3" 
-					&& strtolower(get_class($arg)) != "math_tuple") )  
+		elseif ( is_object($arg) && (strtolower(get_class($arg)) != "math_vector3"
+					&& strtolower(get_class($arg)) != "math_tuple") )
 			$this->tuple = null;
-		elseif ( is_object($arg) && strtolower(get_class($arg)) == "math_tuple" 
-				&& $arg->getSize() != 3 ) 
+		elseif ( is_object($arg) && strtolower(get_class($arg)) == "math_tuple"
+				&& $arg->getSize() != 3 )
 			$this->tuple = null;
 		else
 			$this->Math_Vector($arg);

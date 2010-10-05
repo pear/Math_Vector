@@ -19,7 +19,7 @@
 // $Id$
 //
 
-require_once "Math/Vector/Vector.php";
+require_once "Math/Vector.php";
 
 /**
  * 2D Vector class
@@ -42,10 +42,10 @@ class Math_Vector2 extends Math_Vector {
 	{
 		if ( is_array($arg) && count($arg) != 2 )
 			$this->tuple = null;
-		elseif ( is_object($arg) && (strtolower(get_class($arg)) != "math_vector2" 
-					&& strtolower(get_class($arg)) != "math_tuple") )  
+		elseif ( is_object($arg) && (strtolower(get_class($arg)) != "math_vector2"
+					&& strtolower(get_class($arg)) != "math_tuple") )
 			$this->tuple = null;
-		elseif ( is_object($arg) && strtolower(get_class($arg)) == "math_tuple" 
+		elseif ( is_object($arg) && strtolower(get_class($arg)) == "math_tuple"
 				&& $arg->getSize() != 2 )
 			$this->tuple = null;
 		else
