@@ -1,4 +1,4 @@
-<?php
+    <?php
 //
 // +----------------------------------------------------------------------+
 // | PHP Version 5                                                        |
@@ -19,8 +19,6 @@
 // $Id$
 //
 
-require_once "PEAR.php";
-
 /**
  * General Tuple class
  * A Tuple represents a general unidimensional list of n numeric elements
@@ -28,10 +26,10 @@ require_once "PEAR.php";
  *
  * @author  Jesus M. Castagnetto <jmcastagnetto@php.net>
  * @version 1.0
- * @access  public
  * @package Math_Vector
  */
-class Math_Tuple {
+class Math_Tuple
+{
 
     /**
      * array of numeric elements
@@ -45,26 +43,22 @@ class Math_Tuple {
      * Constructor of Math_Tuple
      *
      * @param   array   $data   array of numbers
-     * @access  public
-     * @return  object  Math_Tuple (or PEAR_Error on error)
      */
     public function __construct($data)
     {
         if (is_array($data) || !is_array($data[0])) {
             $this->data = $data;
         } else {
-            new PEAR_Error("An unidimensional array is needed to initialize a Tuple",
-                                null, PEAR_ERROR_DIE);
+            throw new InvalidArgumentException("An unidimensional array is needed to initialize a Tuple");
         }
     }
 
     /**
      * Squeezes out holes in the tuple sequence
      *
-     * @access  public
      * @return  void
      */
-    function squeezeHoles ()/*{{{*/
+    public function squeezeHoles()
     {
         $this->data = explode(":", implode(":",$this->data));
     }
@@ -72,10 +66,9 @@ class Math_Tuple {
     /**
      * Returns the size (number of elements) in the tuple
      *
-     * @access  public
      * @return  integer
      */
-    function getSize ()
+    public function getSize()
     {
         return count($this->data);
     }
@@ -83,15 +76,16 @@ class Math_Tuple {
     /**
      * Sets the value of an element
      *
-     * @access  public
      * @param   integer $elindex    element index
      * @param   numeric $elvalue    element value
-     * @return  mixed   true if successful, PEAR_Error object otherwise
+     *
+     * @return  mixed   true if successful
+     * @throws InvalidArgumentException
      */
-    function setElement ($elindex, $elvalue)
+    public function setElement($elindex, $elvalue)
     {
         if ($elindex >= $this->getSize()) {
-            return PEAR::raiseError("Wrong index: $elindex for element: $elvalue");
+            throw new InvalidArgumentException("Wrong index: $elindex for element: $elvalue");
         }
         $this->data[$elindex] = $elvalue;
         return true;
@@ -100,14 +94,13 @@ class Math_Tuple {
     /**
      * Appends an element to the tuple
      *
-     * @access  public
      * @param   numeric $elvalue    element value
-     * @return  mixed   index of appended element on success, PEAR_Error object otherwise
+     * @return  mixed   index of appended element on success
      */
-    function addElement ($elvalue)
+    public function addElement($elvalue)
     {
         if (!is_numeric($elvalue)) {
-            return PEAR::raiseError("Error, a numeric value is needed. You used: $elvalue");
+            throw new InvalidArgumentException("Error, a numeric value is needed. You used: $elvalue");
         }
         $this->data[$this->getSize()] = $elvalue;
         return ($this->getSize() - 1);
@@ -116,16 +109,19 @@ class Math_Tuple {
     /**
      * Remove an element from the tuple
      *
-     * @access public
      * @param   integer $elindex    element index
-     * @return  mixed   true on success, PEAR_Error object otherwise
+     *
+     * @return mixed   true on success
+     * @throws InvalidArgumentException
      */
-    function delElement ($elindex)
+    public function delElement($elindex)
     {
         if ($elindex >= $this->getSize()) {
-            return PEAR::raiseError("Wrong index: $elindex, element not deleted");
+            throw new InvalidArgumentException("Wrong index: $elindex, element not deleted");
         }
+
         unset($this->data[$elindex]);
+
         $this->squeezeHoles();
         return true;
     }
@@ -135,12 +131,13 @@ class Math_Tuple {
      *
      * @access  public
      * @param   integer $elindex    element index
-     * @return  mixed   numeric on success, PEAR_Error otherwise
+     * @return  mixed   numeric on success
+     * @throws InvalidArgumentException
      */
-    function getElement($elindex)
+    public function getElement($elindex)
     {
         if ($elindex >= $this->getSize()) {
-            return PEAR::raiseError("Wrong index: $elindex, Tuple size is: ".$this->getSize());
+            throw new InvalidArgumentException("Wrong index: $elindex, Tuple size is: ".$this->getSize());
         }
         return $this->data[$elindex];
     }
@@ -148,10 +145,9 @@ class Math_Tuple {
     /**
      * Returns an array with all the elements of the tuple
      *
-     * @access  public
      * @return  $array
      */
-    function getData ()
+    public function getData()
     {
         $this->squeezeHoles();
         return $this->data;
@@ -163,7 +159,7 @@ class Math_Tuple {
      * @access  public
      * @return  numeric
      */
-    function getMin ()
+    public function getMin()
     {
         return min($this->getData());
     }
@@ -171,10 +167,9 @@ class Math_Tuple {
     /**
      * Returns the maximum value of the tuple
      *
-     * @access  public
      * @return  numeric
      */
-    function getMax ()
+    public function getMax()
     {
         return max($this->getData());
     }
@@ -185,7 +180,7 @@ class Math_Tuple {
      * @access  public
      * @return  array of the minimum and maximum values
      */
-    function getMinMax ()
+    public function getMinMax ()
     {
         return array ($this->getMin(), $this->getMax());
     }
@@ -193,11 +188,10 @@ class Math_Tuple {
     /**
      * Gets the position of the given value in the tuple
      *
-     * @access  public
      * @param   numeric $val    value for which the index is requested
      * @return  integer
      */
-    function getValueIndex ($val)
+    public function getValueIndex($val)
     {
         for ($i=0; $i < $this->getSize(); $i++) {
             if ($this->data[$i] == $val) {
@@ -210,10 +204,9 @@ class Math_Tuple {
     /**
      * Gets the position of the minimum value in the tuple
      *
-     * @access  public
      * @return  integer
      */
-    function getMinIndex ()
+    public function getMinIndex()
     {
         return $this->getValueIndex($this->getMin());
     }
@@ -221,10 +214,9 @@ class Math_Tuple {
     /**
      * Gets the position of the maximum value in the tuple
      *
-     * @access  public
      * @return  integer
      */
-    function getMaxIndex ()
+    public function getMaxIndex()
     {
         return $this->getValueIndex($this->getMax());
     }
@@ -232,10 +224,9 @@ class Math_Tuple {
     /**
      * Gets an array of the positions of the minimum and maximum values in the tuple
      *
-     * @access  public
      * @return  array of integers indexes
      */
-    function getMinMaxIndex ()
+    public function getMinMaxIndex()
     {
         return array($this->getMinIndex(), $this->getMaxIndex());
     }
@@ -243,10 +234,9 @@ class Math_Tuple {
     /**
      * Checks if the tuple is a a Zero tuple
      *
-     * @access  public
      * @return  boolean
      */
-    function isZero ()
+    public function isZero()
     {
         for ($i=0; $i < $this->getSize(); $i++) {
             if ($this->data[$i] != 0) {
@@ -262,9 +252,20 @@ class Math_Tuple {
      * @access  public
      * @return  string
      */
-    function toString ()
+    public function toString()
     {
         return "{ ".implode(", ",$this->data)." }";
+    }
+
+    /**
+     * Returns an string representation of the tuple
+     *
+     * @access  public
+     * @return  string
+     */
+    public function __toString()
+    {
+        return $this->toString();
     }
 
     /**
@@ -273,7 +274,7 @@ class Math_Tuple {
      * @access  public
      * @return  string
      */
-    function toHTML()
+    public function toHTML()
     {
         $out = "<table border>\n\t<caption align=\"top\"><b>Vector</b></caption>\n";
         $out .= "\t<tr align=\"center\">\n\t\t<th>i</th><th>value</th>\n\t</tr>\n";

@@ -19,8 +19,6 @@
 // $Id$
 //
 
-require_once "PEAR.php";
-
 class Math_CompactedTuple
 {
 
@@ -62,14 +60,14 @@ class Math_CompactedTuple
     }
 
     public function delElement($value) {
-        if (in_array($value, array_keys($this->data))) {
+        if (!in_array($value, array_keys($this->data))) {
             $this->data[$value]--;
             if ($this->data[$value] == 0) {
                 unset ($this->data[$value]);
             }
             return true;
         }
-        return PEAR::raiseError("value does not exist in compacted tuple");
+        throw new InvalidArgumentException("value does not exist in compacted tuple");
     }
 
     public function hasElement($value) {
@@ -79,13 +77,13 @@ class Math_CompactedTuple
     public function _genCompactedArray($arr) {
         if (function_exists("array_count_values")) {
             return array_count_values($arr);
-        } else {
-            $out = array();
-            foreach ($arr as $val) {
-                $out[$val]++;
-            }
-            return $out;
         }
+
+        $out = array();
+        foreach ($arr as $val) {
+            $out[$val]++;
+        }
+        return $out;
     }
 
     public function _genUnCompactedArray($arr) {

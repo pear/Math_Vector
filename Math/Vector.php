@@ -19,7 +19,6 @@
 // $Id$
 //
 
-require_once "PEAR.php";
 require_once "Math/Vector/Exception.php";
 require_once "Math/Tuple.php";
 require_once "Math/VectorOp.php";
@@ -51,8 +50,6 @@ class Math_Vector
      *
      * @param array|Math_Tuple|Math_Vector $data A Math_Tuple object, a Math_Vector object, or an array of numeric data
      *
-     * @access  public
-     * @return  object  Math_Vector (or PEAR_Error on error)
      * @see setData()
      */
     public function __construct($data = null)
@@ -67,7 +64,8 @@ class Math_Vector
      *
      * @param array|Math_Tuple|Math_Vector $data a Math_Tuple object, a Math_Vetctor object, or an array of numeric data
      *
-     * @return  boolean|PEAR_Error TRUE on success, a PEAR_Error otherwise
+     * @return  boolean
+     * @throws InvalidArgumentException
      */
     public function setData($data)
     {
@@ -78,7 +76,7 @@ class Math_Vector
         } else if (is_object($data) && strtolower(get_class($data)) == "math_vector") {
             $tuple = $data->getTuple();
         } else {
-            return PEAR::raiseError('Cannot initialize, expecting an array, tuple or vector');
+            throw new InvalidArgumentException('Cannot initialize, expecting an array, tuple or vector');
         }
 
         $this->_tuple = $tuple;
@@ -90,7 +88,8 @@ class Math_Vector
     /**
      * Returns an array of numbers
      *
-     * @return array|PEAR_Error a numeric array on success, a PEAR_Error otherwise
+     * @return array
+     * @throws Math_Vector_Exception
      */
     public function getData()
     {
@@ -98,7 +97,7 @@ class Math_Vector
             return $this->_tuple->getData();
         }
 
-        return PEAR::raiseError('Vector has not been initialized');
+        throw new Math_Vector_Exception('Vector has not been initialized');
     }
 
     /**
@@ -189,8 +188,9 @@ class Math_Vector
     public function reverse()
     {
         $n = $this->size();
-        for ($i=0; $i < $n; $i++)
+        for ($i=0; $i < $n; $i++) {
             $this->_tuple->setElement($i, -1 * $this->_tuple->getElement($i));
+        }
     }
 
     /**
@@ -210,12 +210,12 @@ class Math_Vector
      *
      * @param float $f scaling factor
      *
-     * @return  mixed   void on success, a PEAR_Error object otherwise
+     * @return  mixed   void on success
      */
     public function scale($f)
     {
         if (!is_numeric($f)) {
-            return PEAR::raiseError("Requires a numeric factor and a Math_Vector object");
+            throw new InvalidArgumentException("Requires a numeric factor and a Math_Vector object");
         }
 
         $n = $this->size();
@@ -232,14 +232,12 @@ class Math_Vector
      * @param integer $i     the index of the element
      * @param numeric $value the value to assign to the element
      *
-     * @return  mixed   true on success, a PEAR_Error object otherwise
+     * @return  mixed   true on success
+     * @throws InvalidArgumentException
      */
     public function set($i, $value)
     {
-        $res = $this->_tuple->setElement($i, $value);
-        if (PEAR::isError($res)) {
-            return $res;
-        }
+        $this->_tuple->setElement($i, $value);
 
         return true;
     }
@@ -249,7 +247,8 @@ class Math_Vector
      *
      * @param integer $i the index of the element
      *
-     * @return  mixed   the element value (numeric) on success, a PEAR_Error object otherwise
+     * @return  mixed   the element value (numeric) on success
+     * @throws InvalidArgumentException
      */
     public function get($i) {
         return $this->_tuple->getElement($i);
@@ -261,7 +260,8 @@ class Math_Vector
      * @param   Math_Vector  $vector Math_Vector object
      * @param   string  $type   distance type: cartesian (default), manhattan or chessboard
      *
-     * @return  float on success, a PEAR_Error object on failure
+     * @return  float on success
+     * @throws InvalidArgumentException
      */
     public function distance(Math_Vector $vector, $type = 'cartesian')
     {
@@ -283,19 +283,21 @@ class Math_Vector
      * Returns the cartesian distance to another vector
      *
      * @access  public
-     * @param   object  $vector Math_Vector object
-     * @return  float on success, a PEAR_Error object on failure
+     * @param   Math_Vector  $vector Math_Vector object
+     *
+     * @return  float on success
+     * @throws InvalidArgumentException
      */
-    public function cartesianDistance($vector)
+    public function cartesianDistance(Math_Vector $vector)
     {
         $n = $this->size();
         $sum = 0;
         if (!Math_VectorOp::isVector($vector)) {
-            return PEAR::raiseError("Wrong parameter type, expecting a Math_Vector object");
+            throw new InvalidArgumentException("Wrong parameter type, expecting a Math_Vector object");
         }
 
         if ($vector->size() != $n) {
-            return PEAR::raiseError("Vector has to be of the same size");
+            throw new InvalidArgumentException("Vector has to be of the same size");
         }
 
         for ($i=0; $i < $n; $i++) {
@@ -311,17 +313,18 @@ class Math_Vector
      *
      * @param   Math_Vector  $vector Math_Vector object
      *
-     * @return  float on success, a PEAR_Error object on failure
+     * @return  float on success
+     * @throws InvalidArgumentException
      */
     public function manhattanDistance(Math_Vector $vector)
     {
         if (!Math_VectorOp::isVector($vector)) {
-            return PEAR::raiseError("Wrong parameter type, expecting a Math_Vector object");
+            throw new InvalidArgumentException("Wrong parameter type, expecting a Math_Vector object");
         }
         $n = $this->size();
 
         if ($vector->size() != $n) {
-            return PEAR::raiseError("Vector has to be of the same size");
+            throw new InvalidArgumentException("Vector has to be of the same size");
         }
 
         $sum = 0;
@@ -338,17 +341,18 @@ class Math_Vector
      *
      * @param Math_Vector $vector Math_Vector object
      *
-     * @return  float on success, a PEAR_Error object on failure
+     * @return  float on success
+     * @throws InvalidArgumentException
      */
     public function chessboardDistance(Math_Vector $vector)
     {
         if (!Math_VectorOp::isVector($vector)) {
-            return PEAR::raiseError("Wrong parameter type, expecting a Math_Vector object");
+            throw new InvalidArgumentException("Wrong parameter type, expecting a Math_Vector object");
         }
 
         $n = $this->size();
         if ($vector->size() != $n) {
-            return PEAR::raiseError("Vector has to be of the same size");
+            throw new InvalidArgumentException("Vector has to be of the same size");
         }
 
         $sum = 0;

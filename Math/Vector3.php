@@ -19,7 +19,6 @@
 // $Id$
 //
 
-
 require_once "Math/Vector.php";
 
 /**
