@@ -276,12 +276,16 @@ class Math_VectorOp {
     {
         if (Math_VectorOp::isVector($v1) && Math_VectorOp::isVector($v2)) {
             $n = $v1->size();
-            if ($v2->size() != $n)
+
+            if ($v2->size() != $n) {
                 return PEAR::raiseError("Vectors must of the same size");
+            }
+
             for ($i=0; $i < $n; $i++) {
                 $d = $v2->get($i);
-                if ($d == 0)
+                if ($d == 0) {
                     return PEAR::raiseError("Division by zero: Element $i in V2 is zero");
+                }
                 $arr[$i] = $v1->get($i) / $d;
             }
             return new Math_Vector($arr);
@@ -301,17 +305,18 @@ class Math_VectorOp {
      * @see     isVector2()
      * @see     isVector3()
      */
-    function dotProduct ($v1, $v2)/*{{{*/
+    function dotProduct ($v1, $v2)
     {
-        if (Math_VectorOp::isVector2($v1) && Math_VectorOp::isVector2($v2))
+        if (Math_VectorOp::isVector2($v1) && Math_VectorOp::isVector2($v2)) {
             return ( $v1->getX() * $v2->getX() +
                      $v1->getY() * $v2->getY() );
-        elseif (Math_VectorOp::isVector3($v1) && Math_VectorOp::isVector3($v2))
+        } elseif (Math_VectorOp::isVector3($v1) && Math_VectorOp::isVector3($v2)) {
             return ( $v1->getX() * $v2->getX() +
                      $v1->getY() * $v2->getY() +
                      $v1->getZ() * $v2->getZ() );
-        else
-            return PEAR::raiseError("Vectors must be both of the same type");
+        }
+
+        return PEAR::raiseError("Vectors must be both of the same type");
     }
 
     /**
@@ -353,10 +358,10 @@ class Math_VectorOp {
     {
         if (Math_VectorOp::isVector3($v1)
             && Math_VectorOp::isVector3($v2)
-            && Math_VectorOp::isVector3($v3))
+            && Math_VectorOp::isVector3($v3)) {
             return Math_VectorOp::dotProduct($v1,Math_VectorOp::crossProduct($v2, $v3));
-        else
-            return PEAR_Error("All three vectors must be of the same type");
+        }
+        return PEAR_Error("All three vectors must be of the same type");
     }
 
     /**
@@ -378,9 +383,9 @@ class Math_VectorOp {
             $v1->normalize();
             $v2->normalize();
             return acos( Math_VectorOp::dotProduct($v1,$v2) );
-        } else {
-            return PEAR::raiseError("Vectors must be both of the same type");
         }
+
+        return PEAR::raiseError("Vectors must be both of the same type");
     }
 
     /**
@@ -393,7 +398,7 @@ class Math_VectorOp {
      * @param   numeric $value  value to use for filling the array
      * @return  array
      */
-    function _fill($index, $size, $value)/*{{{*/
+    function _fill($index, $size, $value)
     {
         if (function_exists("array_fill"))
             return array_fill($index, $size, $value);
@@ -403,6 +408,3 @@ class Math_VectorOp {
         return $arr;
     }
 }
-
-
-?>

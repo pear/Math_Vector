@@ -79,19 +79,20 @@ class Math_CompactedTuple {
             return array_count_values($arr);
         } else {
             $out = array();
-            foreach ($arr as $val)
+            foreach ($arr as $val) {
                 $out[$val]++;
+            }
             return $out;
         }
     }
 
     function _genUnCompactedArray($arr) {
         $out = array();
-        foreach ($arr as $val=>$count)
-            for($i=0; $i < $count; $i++)
+        foreach ($arr as $val=>$count) {
+            for($i=0; $i < $count; $i++) {
                 $out[] = $val;
+            }
+        }
         return $out;
     }
 }
-
-?>
