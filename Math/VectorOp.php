@@ -35,11 +35,10 @@ class Math_VectorOp
     /**
      * Checks if object is of Math_Vector class (or a subclass of Math_Vector)
      *
-     * @access  public
      * @param   object  $obj
      * @return  boolean true on success
      */
-    public static function isVector($obj)
+    public static function isVector(Math_Vector $obj)
     {
         if (function_exists("is_a")) {
             return (is_object($obj) && is_a($obj, "Math_Vector"));
@@ -52,11 +51,10 @@ class Math_VectorOp
     /**
      * Checks if object is of Math_Vector2 class (or a subclass of Math_Vector2)
      *
-     * @access  public
      * @param   object  $obj
      * @return  boolean true on success
      */
-    public static function isVector2($obj)
+    public static function isVector2(Math_Vector2 $obj)
     {
         if (function_exists("is_a")) {
             return (is_object($obj) && is_a($obj, "Math_Vector2"));
@@ -69,29 +67,28 @@ class Math_VectorOp
     /**
      * Checks if object is of Math_Vector3 class (or a subclass of Math_Vector3)
      *
-     * @access  public
      * @param   object  $obj
+     *
      * @return  boolean true on success
      */
-    public static function isVector3($obj)
+    public static function isVector3(Math_Vector3 $obj)
     {
         if (function_exists("is_a")) {
             return (is_object($obj) && is_a($obj, "Math_Vector3"));
         }
 
         return (is_object($obj) && (strtolower(get_class($obj)) == "math_vector3" ||
-                is_subclass_of($obj, "Math_Vector3")) );
+                is_subclass_of($obj, "Math_Vector3")));
     }
 
     /**
      * Creates a vector of a given size in which all elements have the same value
      *
-     * @access  public
      * @param   int $size   vector size
      * @param   numeric $value  value to assign to the elements
      * @return  object  if ($size == 2) Math_Vector2 elseif ($size == 3) Math_Vector3 else Math_Vector
      */
-    function create ($size, $value)
+    public static function create ($size, $value)
     {
         if ($size == 2) {
             $VClass = "Math_Vector2";
@@ -107,13 +104,12 @@ class Math_VectorOp
     /**
      * Creates a zero-filled vector of the given size
      *
-     * @access  public
      * @param   int $size   vector size
      * @return  object  if ($size == 2) Math_Vector2 elseif ($size == 3) Math_Vector3 else Math_Vector
      *
      * @see create()
      */
-    function createZero ($size)
+    public static function createZero($size)
     {
         return Math_VectorOp::create($size, 0);
     }
@@ -121,13 +117,12 @@ class Math_VectorOp
     /**
      * Creates a one-filled vector of the given size
      *
-     * @access  public
      * @param   int $size   vector size
      * @return  object  if ($size == 2) Math_Vector2 elseif ($size == 3) Math_Vector3 else Math_Vector
      *
      * @see create()
      */
-    function createOne ($size)
+    public static function createOne($size)
     {
         return Math_VectorOp::create($size, 1);
     }
@@ -138,7 +133,6 @@ class Math_VectorOp
      * A basis vector of size n, has n - 1 elements equal to 0
      * and one element equal to 1
      *
-     * @access  public
      * @param   int $size   vector size
      * @param   int $index  element to be set at 1
      * @return  object  if ($size == 2) Math_Vector2 elseif ($size == 3) Math_Vector3 else Math_Vector
@@ -146,7 +140,7 @@ class Math_VectorOp
      *
      * @see createZero()
      */
-    function createBasis ($size, $index)
+    public static function createBasis($size, $index)
     {
         if ($index >= $size) {
             throw new InvalidArgumentException("Incorrect index for size: $index >= $size");
@@ -160,7 +154,6 @@ class Math_VectorOp
      * Vector addition
      * v + w = <v1 + w1, v2 + w2, ..., vk + wk>
      *
-     * @access  public
      * @param   Math_Vector  $v1
      * @param   Math_Vector $v2
      * @return  Math_Vector on success
@@ -168,7 +161,7 @@ class Math_VectorOp
      * @throws InvalidArgumentException
      * @see     isVector()
      */
-    function add(Math_Vector $v1, Math_Vector $v2)
+    public static function add(Math_Vector $v1, Math_Vector $v2)
     {
         if (Math_VectorOp::isVector($v1) && Math_VectorOp::isVector($v2)) {
             $n = $v1->size();
@@ -189,7 +182,6 @@ class Math_VectorOp
      * Vector substraction
      * v - w = <v1 - w1, v2 - w2, ..., vk - wk>
      *
-     * @access  public
      * @param   Math_Vector (or subclass)   $v1
      * @param   Math_Vector (or subclass)   $v2
      * @return  Math_Vector (or subclass) on success
@@ -219,7 +211,6 @@ class Math_VectorOp
      * Vector multiplication
      * v * w = <v1 * w1, v2 * w2, ..., vk * wk>
      *
-     * @access  public
      * @param   Math_Vector $v1
      * @param   Math_Vector $v2
      * @return  object  Math_Vector (or subclass) on success
@@ -249,7 +240,6 @@ class Math_VectorOp
      * Vector scaling
      * f * w = <f * w1, f * w2, ..., f * wk>
      *
-     * @access  public
      * @param   numeric $f  scaling factor
      * @param   object  Math_Vector (or subclass)   $v
      * @return  object  Math_Vector (or subclass) on success
@@ -274,7 +264,6 @@ class Math_VectorOp
      * Vector division
      * v / w = <v1 / w1, v2 / w2, ..., vk / wk>
      *
-     * @access  public
      * @param   object  Math_Vector (or subclass)   $v1
      * @param   object  Math_Vector (or subclass)   $v2
      * @return  object  Math_Vector (or subclass) on success
@@ -282,7 +271,7 @@ class Math_VectorOp
      *
      * @see     isVector()
      */
-    function divide ($v1, $v2)
+    public static function divide ($v1, $v2)
     {
         if (Math_VectorOp::isVector($v1) && Math_VectorOp::isVector($v2)) {
             $n = $v1->size();
@@ -307,7 +296,6 @@ class Math_VectorOp
     /**
      * Vector dot product = v . w = |v| |w| cos(theta)
      *
-     * @access  public
      * @param   object  Math_Vector2 or MathVector3 (or subclass)   $v1
      * @param   object  Math_Vector2 or MathVector3 (or subclass)   $v2
      * @return  mixed   the dot product (float) on success
@@ -316,7 +304,7 @@ class Math_VectorOp
      * @see     isVector2()
      * @see     isVector3()
      */
-    function dotProduct ($v1, $v2)
+    public static function dotProduct ($v1, $v2)
     {
         if (Math_VectorOp::isVector2($v1) && Math_VectorOp::isVector2($v2)) {
             return ( $v1->getX() * $v2->getX() +
@@ -333,7 +321,6 @@ class Math_VectorOp
     /**
      * Vector cross product = v x w
      *
-     * @access  public
      * @param   object  Math_Vector3 (or subclass)  $v1
      * @param   object  Math_Vector3 (or subclass)  $v2
      * @return  object  the cross product vector (Math_Vector3) on success
@@ -341,7 +328,7 @@ class Math_VectorOp
      *
      * @see     isVector3()
      */
-    function crossProduct ($v1, $v2)
+    public static function crossProduct ($v1, $v2)
     {
         if (Math_VectorOp::isVector3($v1) && Math_VectorOp::isVector3($v2)) {
             $arr[0] = $v1->getY() * $v2->getZ() - $v1->getZ() * $v2->getY();
@@ -356,7 +343,6 @@ class Math_VectorOp
     /**
      * Vector triple scalar product =  v1 . (v2 x v3)
      *
-     * @access  public
      * @param   object  Math_Vector3 (or subclass)  $v1
      * @param   object  Math_Vector3 (or subclass)  $v2
      * @param   object  Math_Vector3 (or subclass)  $v3
@@ -367,7 +353,7 @@ class Math_VectorOp
      * @see     dotProduct()
      * @see     crossProduct()
      */
-    function tripleScalarProduct($v1, $v2, $v3)
+    public static function tripleScalarProduct($v1, $v2, $v3)
     {
         if (Math_VectorOp::isVector3($v1)
             && Math_VectorOp::isVector3($v2)
@@ -380,7 +366,6 @@ class Math_VectorOp
     /**
      * Angle between vectors, using the equation: v . w = |v| |w| cos(theta)
      *
-     * @access  public
      * @param   object  Math_Vector2 or MathVector3 (or subclass)   $v1
      * @param   object  Math_Vector2 or MathVector3 (or subclass)   $v2
      * @return  mixed   the angle between vectors (float, in radians) on success
@@ -390,7 +375,7 @@ class Math_VectorOp
      * @see     isVector3()
      * @see     dotProduct()
      */
-    function angleBetween($v1, $v2)
+    public static function angleBetween($v1, $v2)
     {
         if ((Math_VectorOp::isVector2($v1) && Math_VectorOp::isVector2($v2)) ||
              (Math_VectorOp::isVector3($v1) && Math_VectorOp::isVector3($v2)) ) {
@@ -412,7 +397,7 @@ class Math_VectorOp
      * @param   numeric $value  value to use for filling the array
      * @return  array
      */
-    function _fill($index, $size, $value)
+    static function _fill($index, $size, $value)
     {
         if (function_exists("array_fill")) {
             return array_fill($index, $size, $value);
