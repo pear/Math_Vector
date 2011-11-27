@@ -182,7 +182,7 @@ class Math_VectorOp
             return new Math_Vector($arr);
         }
 
-        return throw new InvalidArgumentException("V1 and V2 must be Math_Vector objects");
+        throw new InvalidArgumentException("V1 and V2 must be Math_Vector objects");
     }
 
     /**
