@@ -23,7 +23,6 @@ class Math_VectorTest extends PHPUnit_Framework_TestCase {
 		$this->z = new Math_Vector(new Math_Vector(range(2,5)));
 		$this->y = new Math_Vector2(array(1,2));
 		$this->x = new Math_Vector3(new Math_Tuple(array(1,0,1)));
-		$this->bad = new Math_Vector("foo");
 	}
 
 	// Vector from array
@@ -49,7 +48,12 @@ class Math_VectorTest extends PHPUnit_Framework_TestCase {
 	}
 
 	function testBadVector() {
-		$this->assertTrue(Math_VectorOp::isVector($this->bad) && !$this->bad->isValid());
+		try {
+            new Math_Vector("foo");
+
+            $this->fail("Foo is not a valid array, tuple or vector");
+        } catch (InvalidArgumentException $iae) {
+        }
 	}
 
 	function testLength() {

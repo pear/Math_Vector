@@ -39,7 +39,7 @@ class Math_VectorOp
      * @param   object  $obj
      * @return  boolean true on success
      */
-    function isVector($obj)
+    public static function isVector($obj)
     {
         if (function_exists("is_a")) {
             return (is_object($obj) && is_a($obj, "Math_Vector"));
@@ -56,7 +56,7 @@ class Math_VectorOp
      * @param   object  $obj
      * @return  boolean true on success
      */
-    function isVector2($obj)
+    public static function isVector2($obj)
     {
         if (function_exists("is_a")) {
             return (is_object($obj) && is_a($obj, "Math_Vector2"));
@@ -73,7 +73,7 @@ class Math_VectorOp
      * @param   object  $obj
      * @return  boolean true on success
      */
-    function isVector3($obj)
+    public static function isVector3($obj)
     {
         if (function_exists("is_a")) {
             return (is_object($obj) && is_a($obj, "Math_Vector3"));
