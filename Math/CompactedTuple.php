@@ -1,7 +1,7 @@
 <?php
 //
 // +----------------------------------------------------------------------+
-// | PHP Version 4                                                        |
+// | PHP Version 5                                                        |
 // +----------------------------------------------------------------------+
 // | Copyright (c) 1997-2003 The PHP Group                                |
 // +----------------------------------------------------------------------+
@@ -18,80 +18,80 @@
 //
 // $Id$
 //
-			
+
 require_once "PEAR.php";
 
 class Math_CompactedTuple {
 
-	var $data;
+    var $data;
 
-	function Math_CompactedTuple ($arg) 
-	{
-		if (is_array($arg)) {
-			$this->data = $this->_genCompactedArray($arg);
-		} elseif (is_object($arg) && get_class($arg) == "math_tuple") {
-			$this->data = $this->_genCompacterArray($arg->getData());
-		} else {
-			$msg = "Incorrect parameter for Math_CompactedTuple constructor. ".
-					"Expecting an unidimensional array or a Math_Tuple object,". 
-					" got '$arg'\n";
-			PEAR::raiseError($msg);
-		}
-		return true;
-	}
+    function Math_CompactedTuple ($arg)
+    {
+        if (is_array($arg)) {
+            $this->data = $this->_genCompactedArray($arg);
+        } elseif (is_object($arg) && get_class($arg) == "math_tuple") {
+            $this->data = $this->_genCompacterArray($arg->getData());
+        } else {
+            $msg = "Incorrect parameter for Math_CompactedTuple constructor. ".
+                    "Expecting an unidimensional array or a Math_Tuple object,".
+                    " got '$arg'\n";
+            PEAR::raiseError($msg);
+        }
+        return true;
+    }
 
-	function getSize() {
-		return count($this->_genUnCompactedArray($this->data));
-	}
+    function getSize() {
+        return count($this->_genUnCompactedArray($this->data));
+    }
 
-	function getCompactedSize() {
-		return count($this->data);
-	}
+    function getCompactedSize() {
+        return count($this->data);
+    }
 
-	function getCompactedData() {
-		return $this->data;
-	}
+    function getCompactedData() {
+        return $this->data;
+    }
 
-	function getData() {
-		return $this->_genUnCompactedArray($this->data);
-	}
+    function getData() {
+        return $this->_genUnCompactedArray($this->data);
+    }
 
-	function addElement($value) {
-		$this->data[$value]++;
-	}
-	
-	function delElement($value) {
-		if (in_array($value, array_keys($this->data))) {
-			$this->data[$value]--;
-			if ($this->data[$value] == 0)
-				unset ($this->data[$value]);
-			return true;
-		}
-		return PEAR::raiseError("value does not exist in compacted tuple");
-	}
+    function addElement($value) {
+        $this->data[$value]++;
+    }
 
-	function hasElement($value) {
-		return in_array($value, array_keys($this->data));
-	}
+    function delElement($value) {
+        if (in_array($value, array_keys($this->data))) {
+            $this->data[$value]--;
+            if ($this->data[$value] == 0)
+                unset ($this->data[$value]);
+            return true;
+        }
+        return PEAR::raiseError("value does not exist in compacted tuple");
+    }
 
-	function _genCompactedArray($arr) {
-		if (function_exists("array_count_values")) {
-			return array_count_values($arr);
-		} else {
-			$out = array();
-			foreach ($arr as $val)
-				$out[$val]++;
-			return $out;
-		}
-	}
+    function hasElement($value) {
+        return in_array($value, array_keys($this->data));
+    }
 
-	function _genUnCompactedArray($arr) {
-		$out = array();
-		foreach ($arr as $val=>$count)
-			for($i=0; $i < $count; $i++)
-				$out[] = $val;
-		return $out;
-	}
+    function _genCompactedArray($arr) {
+        if (function_exists("array_count_values")) {
+            return array_count_values($arr);
+        } else {
+            $out = array();
+            foreach ($arr as $val)
+                $out[$val]++;
+            return $out;
+        }
+    }
+
+    function _genUnCompactedArray($arr) {
+        $out = array();
+        foreach ($arr as $val=>$count)
+            for($i=0; $i < $count; $i++)
+                $out[] = $val;
+        return $out;
+    }
 }
 
 ?>
