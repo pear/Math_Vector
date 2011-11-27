@@ -41,18 +41,20 @@ class Math_Vector
      *
      * @var     object  Math_Tuple
      * @access  private
+     * @todo Provide getter
      */
-    var $_tuple = null;
+    public $_tuple = null;
 
     /**
      * Constructor for Math_Vector
      *
-     * @param   optional array|Math_Tuple|Math_Vector   $data   a Math_Tuple object, a Math_Vetctor object, or an array of numeric data
+     * @param array|Math_Tuple|Math_Vector $data A Math_Tuple object, a Math_Vector object, or an array of numeric data
+     *
      * @access  public
      * @return  object  Math_Vector (or PEAR_Error on error)
      * @see setData()
      */
-    function __construct($data=null)
+    public function __construct($data = null)
     {
         if (!is_null($data)) {
             $this->setData($data);
@@ -62,11 +64,11 @@ class Math_Vector
     /**
      * Initializes the vector
      *
-     * @param   array|Math_Tuple|Math_Vector    $data   a Math_Tuple object, a Math_Vetctor object, or an array of numeric data
-     * @access  public
+     * @param array|Math_Tuple|Math_Vector $data a Math_Tuple object, a Math_Vetctor object, or an array of numeric data
+     *
      * @return  boolean|PEAR_Error TRUE on success, a PEAR_Error otherwise
      */
-    function setData($data)
+    public function setData($data)
     {
         if (is_array($data)) {
             $tuple = new Math_Tuple($data);
@@ -77,7 +79,9 @@ class Math_Vector
         } else {
             return PEAR::raiseError('Cannot initialize, expecting an array, tuple or vector');
         }
+
         $this->_tuple = $tuple;
+
         return true;
     }
 
@@ -85,25 +89,23 @@ class Math_Vector
     /**
      * Returns an array of numbers
      *
-     * @access public
      * @return array|PEAR_Error a numeric array on success, a PEAR_Error otherwise
      */
-    function getData()
+    public function getData()
     {
         if ($this->isValid()) {
             return $this->_tuple->getData();
-        } else {
-            return PEAR::raiseError('Vector has not been initialized');
         }
+
+        return PEAR::raiseError('Vector has not been initialized');
     }
 
     /**
      * Checks if the vector has been correctly initialized
      *
-     * @access  public
      * @return  boolean
      */
-    function isValid()
+    public function isValid()
     {
         return (!is_null($this->_tuple) && is_object($this->_tuple) &&
                 strtolower(get_class($this->_tuple)) == "math_tuple");
@@ -112,25 +114,24 @@ class Math_Vector
     /**
      * Returns the square of the vector's length
      *
-     * @access  public
      * @return  float
      */
-    function lengthSquared()
+    public function lengthSquared()
     {
         $n = $this->size();
         $sum = 0;
-        for ($i=0; $i < $n; $i++)
+        for ($i=0; $i < $n; $i++) {
             $sum += pow($this->_tuple->getElement($i), 2);
+        }
         return $sum;
     }
 
     /**
      * Returns the length of the vector
      *
-     * @access  public
      * @return  float
      */
-    function length()
+    public function length()
     {
         return sqrt($this->lengthSquared());
     }
@@ -138,10 +139,9 @@ class Math_Vector
     /**
      * Returns the magnitude of the vector. Alias of length
      *
-     * @access  public
      * @return  float
      */
-    function magnitude()
+    public function magnitude()
     {
         return $this->length();
     }
@@ -149,10 +149,9 @@ class Math_Vector
     /**
      * Normalizes the vector, converting it to a unit vector
      *
-     * @access  public
      * @return  void
      */
-    function normalize()
+    public function normalize()
     {
         $n = $this->size();
         $length = $this->length();
@@ -164,10 +163,9 @@ class Math_Vector
     /**
      * returns the Math_Tuple object corresponding to the vector
      *
-     * @access  public
      * @return  object  Math_Tuple
      */
-    function getTuple()
+    public function getTuple()
     {
         return $this->_tuple;
     }
@@ -175,10 +173,9 @@ class Math_Vector
     /**
      * Returns the number of elements (dimensions) of the vector
      *
-     * @access  public
      * @return  float
      */
-    function size()
+    public function size()
     {
         return $this->_tuple->getSize();
     }
@@ -186,10 +183,9 @@ class Math_Vector
     /**
      * Reverses the direction of the vector negating each element
      *
-     * @access  public
      * @return  void
      */
-    function reverse()
+    public function reverse()
     {
         $n = $this->size();
         for ($i=0; $i < $n; $i++)
@@ -199,12 +195,11 @@ class Math_Vector
     /**
      * Conjugates the vector. Alias of reverse.
      *
-     * @access  public
      * @return  void
      *
      * @see     reverse()
      */
-    function conjugate()
+    public function conjugate()
     {
         $this->reverse();
     }
@@ -212,32 +207,33 @@ class Math_Vector
     /**
      * Scales the vector elements by the given factor
      *
-     * @access  public
-     * @param   float   $f  scaling factor
+     * @param float $f scaling factor
+     *
      * @return  mixed   void on success, a PEAR_Error object otherwise
      */
-    function scale($f)
+    public function scale($f)
     {
-        if (is_numeric($f)) {
-            $n = $this->size();
-            $t = $this->getTuple();
-            for ($i=0; $i < $n; $i++) {
-                $this->set($i, $this->get($i) * $f);
-            }
-        } else {
+        if (!is_numeric($f)) {
             return PEAR::raiseError("Requires a numeric factor and a Math_Vector object");
+        }
+
+        $n = $this->size();
+        $t = $this->getTuple();
+
+        for ($i=0; $i < $n; $i++) {
+            $this->set($i, $this->get($i) * $f);
         }
     }
 
     /**
      * Sets the value of a element
      *
-     * @access  public
-     * @param   integer $i  the index of the element
-     * @param   numeric $value  the value to assign to the element
+     * @param integer $i     the index of the element
+     * @param numeric $value the value to assign to the element
+     *
      * @return  mixed   true on success, a PEAR_Error object otherwise
      */
-    function set($i, $value)
+    public function set($i, $value)
     {
         $res = $this->_tuple->setElement($i, $value);
         if (PEAR::isError($res)) {
@@ -250,36 +246,35 @@ class Math_Vector
     /**
      * Gets the value of a element
      *
-     * @access  public
-     * @param   integer $i  the index of the element
+     * @param integer $i the index of the element
+     *
      * @return  mixed   the element value (numeric) on success, a PEAR_Error object otherwise
      */
-    function get($i) {
-        $res = $this->_tuple->getElement($i);
-        return $res;
+    public function get($i) {
+        return $this->_tuple->getElement($i);
     }
 
     /**
      * Returns the distance to another vector
      *
-     * @access  public
-     * @param   object  $vector Math_Vector object
+     * @param   Math_Vector  $vector Math_Vector object
      * @param   string  $type   distance type: cartesian (default), manhattan or chessboard
+     *
      * @return  float on success, a PEAR_Error object on failure
      */
-    function distance($vector, $type='cartesian')
+    public function distance(Math_Vector $vector, $type = 'cartesian')
     {
         switch ($type) {
-            case 'manhattan':
-            case 'city':
-                return $this->manhattanDistance($vector);
-                break;
-            case 'chessboard':
-                return $this->chessboardDistance($vector);
-                break;
-            case 'cartesian':
-            default :
-                return $this->cartesianDistance($vector);
+        case 'manhattan':
+        case 'city':
+            return $this->manhattanDistance($vector);
+
+        case 'chessboard':
+            return $this->chessboardDistance($vector);
+
+        case 'cartesian':
+        default:
+            return $this->cartesianDistance($vector);
         }
     }
 
@@ -290,85 +285,96 @@ class Math_Vector
      * @param   object  $vector Math_Vector object
      * @return  float on success, a PEAR_Error object on failure
      */
-    function cartesianDistance($vector)
+    public function cartesianDistance($vector)
     {
         $n = $this->size();
         $sum = 0;
-        if (Math_VectorOp::isVector($vector)) {
-            if ($vector->size() == $n) {
-                for($i=0; $i < $n; $i++) {
-                    $sum += pow(($this->_tuple->getElement($i) - $vector->_tuple->getElement($i)), 2);
-                }
-
-                return sqrt($sum);
-            } else {
-                return PEAR::raiseError("Vector has to be of the same size");
-            }
-        } else {
+        if (!Math_VectorOp::isVector($vector)) {
             return PEAR::raiseError("Wrong parameter type, expecting a Math_Vector object");
         }
+
+        if ($vector->size() != $n) {
+            return PEAR::raiseError("Vector has to be of the same size");
+        }
+
+        for ($i=0; $i < $n; $i++) {
+            $sum += pow(($this->_tuple->getElement($i) - $vector->_tuple->getElement($i)), 2);
+        }
+
+        return sqrt($sum);
     }
 
     /**
      * Returns the Manhattan (aka City) distance to another vector
      * Definition: manhattan dist. = |x1 - x2| + |y1 - y2| + ...
      *
-     * @access  public
-     * @param   object  $vector Math_Vector object
+     * @param   Math_Vector  $vector Math_Vector object
+     *
      * @return  float on success, a PEAR_Error object on failure
      */
-    function manhattanDistance($vector)
+    public function manhattanDistance(Math_Vector $vector)
     {
-        $n = $this->size();
-        $sum = 0;
-        if (Math_VectorOp::isVector($vector)) {
-            if ($vector->size() == $n) {
-                for($i=0; $i < $n; $i++) {
-                    $sum += abs($this->_tuple->getElement($i) - $vector->_tuple->getElement($i));
-                }
-                return $sum;
-            } else {
-                return PEAR::raiseError("Vector has to be of the same size");
-            }
-        } else {
+        if (!Math_VectorOp::isVector($vector)) {
             return PEAR::raiseError("Wrong parameter type, expecting a Math_Vector object");
         }
+        $n = $this->size();
+
+        if ($vector->size() != $n) {
+            return PEAR::raiseError("Vector has to be of the same size");
+        }
+
+        $sum = 0;
+        for ($i=0; $i < $n; $i++) {
+            $sum += abs($this->_tuple->getElement($i) - $vector->_tuple->getElement($i));
+        }
+
+        return $sum;
     }
 
     /**
      * Returns the Chessboard distance to another vector
      * Definition: chessboard dist. = max(|x1 - x2|, |y1 - y2|, ...)
      *
-     * @access  public
-     * @param   object  $vector Math_Vector object
+     * @param Math_Vector $vector Math_Vector object
+     *
      * @return  float on success, a PEAR_Error object on failure
      */
-    function chessboardDistance($vector)
+    public function chessboardDistance(Math_Vector $vector)
     {
-        $n = $this->size();
-        $sum = 0;
-        if (Math_VectorOp::isVector($vector)) {
-            if ($vector->size() == $n) {
-                $cdist = array();
-                for($i=0; $i < $n; $i++)
-                    $cdist[] = abs($this->_tuple->getElement($i) - $vector->_tuple->getElement($i));
-                return max($cdist);
-            } else {
-                return PEAR::raiseError("Vector has to be of the same size");
-            }
-        } else {
+        if (!Math_VectorOp::isVector($vector)) {
             return PEAR::raiseError("Wrong parameter type, expecting a Math_Vector object");
         }
+
+        $n = $this->size();
+        if ($vector->size() != $n) {
+            return PEAR::raiseError("Vector has to be of the same size");
+        }
+
+        $sum = 0;
+        $cdist = array();
+        for ($i=0; $i < $n; $i++) {
+            $cdist[] = abs($this->_tuple->getElement($i) - $vector->_tuple->getElement($i));
+        }
+        return max($cdist);
     }
 
     /**
      * Returns a simple string representation of the vector
      *
-     * @access  public
      * @return  string
      */
-    function toString()
+    public function toString()
     {
-        return "Vector: < ".implode(", ",$this->_tuple->getData())." >";
+        return "Vector: < ".implode(", ", $this->_tuple->getData())." >";
+    }
+
+    /**
+     * Returns a simple string representation of the vector
+     *
+     * @return  string
+     */
+    public function __toString()
+    {
+        return $this->toString();
     }
 }

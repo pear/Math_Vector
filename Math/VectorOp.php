@@ -40,11 +40,12 @@ class Math_VectorOp {
      */
     function isVector($obj)
     {
-        if (function_exists("is_a"))
+        if (function_exists("is_a")) {
             return (is_object($obj) && is_a($obj, "Math_Vector"));
-        else
-            return (is_object($obj) && (strtolower(get_class($obj)) == "math_vector" ||
-                        is_subclass_of($obj, "Math_Vector")));
+        }
+
+        return (is_object($obj) && (strtolower(get_class($obj)) == "math_vector" ||
+                    is_subclass_of($obj, "Math_Vector")));
     }
 
     /**
@@ -56,11 +57,12 @@ class Math_VectorOp {
      */
     function isVector2($obj)
     {
-        if (function_exists("is_a"))
+        if (function_exists("is_a")) {
             return (is_object($obj) && is_a($obj, "Math_Vector2"));
-        else
-            return (is_object($obj) && (strtolower(get_class($obj)) == "math_vector2" ||
-                is_subclass_of($obj, "Math_Vector2")));
+        }
+
+        return (is_object($obj) && (strtolower(get_class($obj)) == "math_vector2" ||
+            is_subclass_of($obj, "Math_Vector2")));
     }
 
     /**
@@ -72,11 +74,12 @@ class Math_VectorOp {
      */
     function isVector3($obj)
     {
-        if (function_exists("is_a"))
+        if (function_exists("is_a")) {
             return (is_object($obj) && is_a($obj, "Math_Vector3"));
-        else
-            return (is_object($obj) && (strtolower(get_class($obj)) == "math_vector3" ||
-                    is_subclass_of($obj, "Math_Vector3")) );
+        }
+
+        return (is_object($obj) && (strtolower(get_class($obj)) == "math_vector3" ||
+                is_subclass_of($obj, "Math_Vector3")) );
     }
 
     /**
@@ -354,14 +357,14 @@ class Math_VectorOp {
      * @see     dotProduct()
      * @see     crossProduct()
      */
-    function tripleScalarProduct ($v1, $v2, $v3)
+    function tripleScalarProduct($v1, $v2, $v3)
     {
         if (Math_VectorOp::isVector3($v1)
             && Math_VectorOp::isVector3($v2)
             && Math_VectorOp::isVector3($v3)) {
             return Math_VectorOp::dotProduct($v1,Math_VectorOp::crossProduct($v2, $v3));
         }
-        return PEAR_Error("All three vectors must be of the same type");
+        return PEAR::raiseError("All three vectors must be of the same type");
     }
 
     /**
@@ -403,8 +406,10 @@ class Math_VectorOp {
         if (function_exists("array_fill"))
             return array_fill($index, $size, $value);
 
-        for ($i=$index; $i < ($index + $size); $i++)
+        for ($i=$index; $i < ($index + $size); $i++) {
             $arr[$i] = $value;
+        }
+
         return $arr;
     }
 }
