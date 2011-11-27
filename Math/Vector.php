@@ -20,6 +20,7 @@
 //
 
 require_once "PEAR.php";
+require_once "Math/Vector/Exception.php";
 require_once "Math/Tuple.php";
 require_once "Math/VectorOp.php";
 
