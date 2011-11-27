@@ -189,7 +189,7 @@ class Math_VectorOp
      *
      * @see     isVector()
      */
-    public function substract($v1, $v2)
+    public static function substract($v1, $v2)
     {
         if (Math_VectorOp::isVector($v1) && Math_VectorOp::isVector($v2)) {
             $n = $v1->size();
@@ -247,7 +247,7 @@ class Math_VectorOp
      *
      * @see     isVector()
      */
-    public function scale($f, $v)
+    public static function scale($f, $v)
     {
         if (is_numeric($f) && Math_VectorOp::isVector($v)) {
             $n = $v->size();
