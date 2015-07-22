@@ -47,6 +47,10 @@ class Math_VectorTest extends PHPUnit_Framework_TestCase {
 		$this->assertTrue(Math_VectorOp::isVector3($this->x) && $this->x->isValid());
 	}
 
+	function testDotProduct() {
+		$this->assertEquals(2, Math_VectorOp::dotProduct($this->x, $this->x));
+	}
+
 	function testBadVector() {
 		try {
             new Math_Vector("foo");
