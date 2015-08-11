@@ -60,7 +60,7 @@ class Math_Tuple
      */
     public function squeezeHoles()
     {
-        $this->data = explode(":", implode(":",$this->data));
+        $this->data = array_values($this->data);
     }
 
     /**
