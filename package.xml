@@ -39,7 +39,6 @@ Introduced InvalidArgumentException and Math_Vector_Exception
    <file baseinstalldir="/" md5sum="6f6f8ff85415464016ea5cbc9d9a6959" name="/Math/Vector3.php" role="php" />
    <file baseinstalldir="/" md5sum="f4ed2a1b7cdb8fbdd8ceb3b7142b6dd0" name="/Math/VectorOp.php" role="php" />
    <file baseinstalldir="/" md5sum="c789e435a2f7f42b80d503522b4f1c35" name="/Math/Vector/Exception.php" role="php" />
-   <file baseinstalldir="/" md5sum="5ffb29f182e3e895b080043eb76fe5b7" name="/tests/AllTests.php" role="php" />
    <file baseinstalldir="/" md5sum="10165682da96c8417a2581ed6632c892" name="/tests/Math_VectorTest.php" role="php" />
    <file baseinstalldir="/" md5sum="6f3bb8d1ec82ff4853e3904a0e64c6f2" name="README" role="data" />
   </dir>
