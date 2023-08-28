@@ -46,7 +46,7 @@ class Math_Tuple
      */
     public function __construct($data)
     {
-        if (is_array($data) || !is_array($data[0])) {
+        if (is_array($data) && !is_array($data[0])) {
             $this->data = $data;
         } else {
             throw new InvalidArgumentException("An unidimensional array is needed to initialize a Tuple");
