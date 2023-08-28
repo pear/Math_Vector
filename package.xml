@@ -14,8 +14,8 @@ as well as a static class for vector operations.</description>
  <date>2011-11-28</date>
  <time>09:20:26</time>
  <version>
-  <release>0.8.0</release>
-  <api>0.8.0</api>
+  <release>0.8.1</release>
+  <api>0.8.1</api>
  </version>
  <stability>
   <release>beta</release>
@@ -33,13 +33,13 @@ Introduced InvalidArgumentException and Math_Vector_Exception
    <file baseinstalldir="/" md5sum="c495b92d146262aaf48406dda6b978f7" name="/examples/vector_creation.php" role="php" />
    <file baseinstalldir="/" md5sum="440630d108ad432c849a78870a1e202e" name="/examples/vector_operations.php" role="php" />
    <file baseinstalldir="/" md5sum="596f188ccc94d6e98889515ba25b1c1d" name="/Math/CompactedTuple.php" role="php" />
-   <file baseinstalldir="/" md5sum="1ebbb4553e9197c419e5a6d75e7e4346" name="/Math/Tuple.php" role="php" />
+   <file baseinstalldir="/" md5sum="a192ead596c877257e4ec035c732dee8" name="/Math/Tuple.php" role="php" />
    <file baseinstalldir="/" md5sum="cbe89b95bbef1fd45f227103c875d64d" name="/Math/Vector.php" role="php" />
    <file baseinstalldir="/" md5sum="cba9399010cbf90c77c0857ac6290963" name="/Math/Vector2.php" role="php" />
    <file baseinstalldir="/" md5sum="6f6f8ff85415464016ea5cbc9d9a6959" name="/Math/Vector3.php" role="php" />
-   <file baseinstalldir="/" md5sum="f4ed2a1b7cdb8fbdd8ceb3b7142b6dd0" name="/Math/VectorOp.php" role="php" />
+   <file baseinstalldir="/" md5sum="303c519e92a01f778f7e865566e14b90" name="/Math/VectorOp.php" role="php" />
    <file baseinstalldir="/" md5sum="c789e435a2f7f42b80d503522b4f1c35" name="/Math/Vector/Exception.php" role="php" />
-   <file baseinstalldir="/" md5sum="10165682da96c8417a2581ed6632c892" name="/tests/Math_VectorTest.php" role="php" />
+   <file baseinstalldir="/" md5sum="8824a27e352b6432f0ad5bee31d654dd" name="/tests/Math_VectorTest.php" role="php" />
    <file baseinstalldir="/" md5sum="6f3bb8d1ec82ff4853e3904a0e64c6f2" name="README" role="data" />
   </dir>
  </contents>
