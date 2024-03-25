@@ -1,6 +1,6 @@
 <?php
 
-require_once "Math/Vector/Tuple.php";
+require_once "Math/Tuple.php";
 
 echo "Creating tuple\n";
 $t = new Math_Tuple(array(2,3,4));

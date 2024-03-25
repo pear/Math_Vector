@@ -1,9 +1,9 @@
 <?php
 
-require_once "Math/Vector/Vector.php";
-require_once "Math/Vector/Vector2.php";
-require_once "Math/Vector/Vector3.php";
-require_once "Math/Vector/VectorOp.php";
+require_once "Math/Vector.php";
+require_once "Math/Vector2.php";
+require_once "Math/Vector3.php";
+require_once "Math/VectorOp.php";
 
 $v1 = new Math_Vector2(array(1,2));
 $v2 = new Math_Vector2(array(2,4));
