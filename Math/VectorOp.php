@@ -218,7 +218,7 @@ class Math_VectorOp
      *
      * @see     isVector()
      */
-    public function multiply(Math_Vector $v1, Math_Vector $v2)
+    public static function multiply(Math_Vector $v1, Math_Vector $v2)
     {
         if (Math_VectorOp::isVector($v1) && Math_VectorOp::isVector($v2)) {
             $n = $v1->size();
