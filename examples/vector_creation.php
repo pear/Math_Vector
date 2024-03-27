@@ -40,11 +40,10 @@ $y = new Math_Vector2(array(1,3));
 echo $y->toString()."\n";
 
 echo "==\nInvalid vector\n";
-$bar = new Math_Vector("foo");
-if ($bar->isValid())
-    echo "bar is good\n";
-else
+try {
+    $bar = new Math_Vector("foo");
+} catch (Exception $e) {
     echo "bar is bad\n";
-print_r($bar);
+}
 
 ?>
