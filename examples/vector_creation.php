@@ -1,8 +1,8 @@
 <?php
 
-require_once "Math/Vector/Vector.php";
-require_once "Math/Vector/Vector2.php";
-require_once "Math/Vector/Vector3.php";
+require_once "Math/Vector.php";
+require_once "Math/Vector2.php";
+require_once "Math/Vector3.php";
 
 $a = range(2,4);
 $t = new Math_Tuple(array(2,6,8));
@@ -40,11 +40,10 @@ $y = new Math_Vector2(array(1,3));
 echo $y->toString()."\n";
 
 echo "==\nInvalid vector\n";
-$bar = new Math_Vector("foo");
-if ($bar->isValid())
-	echo "bar is good\n";
-else
-	echo "bar is bad\n";
-print_r($bar);
+try {
+    $bar = new Math_Vector("foo");
+} catch (Exception $e) {
+    echo "bar is bad\n";
+}
 
 ?>
