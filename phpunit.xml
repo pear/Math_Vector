@@ -1,20 +1,27 @@
 <?xml version="1.0"?>
-<phpunit verbose="true">
-	<logging>
-		<log type="coverage-html" target="build/coverage" title="Math_Vector" charset="UTF-8" yui="true" highlight="true" lowUpperBound="35" highLowerBound="70"/>
-		<log type="coverage-clover" target="build/logs/clover.xml"/>
-		<log type="junit" target="build/logs/junit.xml" logIncompleteSkipped="false" title="Math_Vector"/>
-	</logging>
-	<filter>
-		<blacklist>
-			<directory suffix=".php">/usr/share/php</directory>
-			<directory suffix=".php">tests/unit/</directory>
-		</blacklist>
-	</filter>
-	<testsuites>
-		<testsuite>
-			<directory>tests</directory>
-			<file>*Test.php</file>
-		</testsuite>
-	</testsuites>
+<phpunit stopOnDefect="true">
+  <testsuites>
+    <testsuite name="Math_Vector">
+      <!-- run all files in sub-directory 'tests'' -->
+      <directory phpVersion="5.0.0">
+        tests
+      </directory>
+    </testsuite>
+  </testsuites>
+  <source>
+    <include>
+      <!-- check to cover all php-files in directory Math-->
+      <directory suffix=".php">Math</directory>
+    </include>
+  </source>
+  <coverage includeUncoveredFiles="true">
+    <report>
+      <text outputFile="Math_Test_Coverage.txt"/>
+    </report>
+  </coverage>
+  <logging>
+    <junit outputFile="Math_Test_Results.xml"/>
+  </logging>
+  <php>
+  </php>
 </phpunit>
